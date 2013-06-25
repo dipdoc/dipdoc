@@ -60,9 +60,8 @@ ivar.data.Map = function Map(o) {
 	*	@param	{Map}	map		Map to which values should be cloned
 	*/
 	this.putAll = function(map) {
-		this.length = map.length;
-		object = map.entrySet();
-		keys = map.keys();
+		this.clear();
+		this.incorporate(map.entrySet());
 	};
 
 	/**

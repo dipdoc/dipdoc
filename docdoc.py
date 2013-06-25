@@ -8,6 +8,8 @@
 # assert can be equal stricEqual deepEqual
 # $assert equal this(m1) params('hello', 1) result(true) Some message for information
 import re
+import markdown
+import pprint
 
 tags = [{'pref':'@','name':'doc'},
   	{'pref':'\$','name':'unit'}]
@@ -25,32 +27,64 @@ def stripCurlyBrackets(s):
 	return s.strip('{}')
 	
 def parseParam(s):
-	#tag = re.compile(r"^\*(?:\s|\t)*(@[\w]+)(?:\s|\t)+(\{[\w]+\})?(?:\s|\t)+([\w]*)(?:\s|\t)*([\w\s\t]*)")
-	return s
+	res = {}
+	prop = re.match('^(\{(?P<type>.*)\})(\s|\t)*(?P<name>(\[(\s|\t)*[a-zA-Z_$][a-zA-Z0-9_$.]*(\s|\t)*(=([0-9.]*|(true|false|undefined|null)|(\{.*\})|(\[.*\])|(".*")|(\'.*\')))?(\s|\t)*\])|([a-zA-Z_$][a-zA-Z0-9_$.]*(\s|\t)*(=([0-9.]*|(true|false|undefined|null)|(\{.*\})|(\[.*\])|(".*")|(\'.*\')))?))(\s|\t)*(?P<text>.*)$', s)
+	if prop is not None:
+		res['type'] = prop.group('type').split('|')
+		res['name'] = prop.group('name').strip()
+		res['mandatory'] = False
+		mand = re.match(r'^\[(.*)\]$', res['name'])
+		if mand is not None:
+			res['mandatory'] = True
+			res['name'] = mand.group(1)
+		res['text'] = prop.group('text')
+		return res
 	
 decl['doc']['param'] = parseParam
 
 def parseReturn(s):
-	return s
-	
+	res = {}
+	prop = re.match('^(\{(?P<type>.*)\})(\s|\t)*(?P<text>.*)$', s)
+	if prop is not None:
+		res['type'] = prop.group('type').split('|')
+		res['text'] = prop.group('text')
+		return res
+		
 decl['doc']['return'] = parseReturn
 	
-
-def parseProperty(s):
-	return s
-	
-decl['doc']['property'] = parseProperty
+decl['doc']['property'] = parseParam
 	
 decl['doc']['this'] = stripCurlyBrackets
 
 decl['doc']['description'] = asIs
+decl['doc']['classdesc'] = asIs
 
 decl['doc']['author'] = asIs
 decl['doc']['copyright'] = asIs
+decl['doc']['licence'] = asIs
 decl['doc']['file'] = asIs
 decl['doc']['namespace'] = asIs
 decl['doc']['version'] = asIs
+
+decl['doc']['link'] = asIs
+decl['doc']['see'] = asIs
 decl['doc']['depends'] = asIs #should try to get imports/requires by itself
+def parseToDo(s):
+	res = {}
+	res['complete'] = False
+	res['urgent'] = False
+	todo = re.match(r'(\[(?P<complete>.*)\])?(\s|\t)*(?P<task>.*)',s)
+	if todo is not None:
+		res['task'] = todo.group('task')
+		if todo.group('complete') is not None:
+			c = todo.group('complete').strip()
+			if c == 'x' or c == '+' or c == '*':
+				res['complete'] = True
+			elif c == '!':
+				res['urgent'] = True
+		return res
+	return
+decl['doc']['todo'] = parseToDo
 
 decl['unit']['prepare'] = asIs
 decl['unit']['assert'] = asIs
@@ -61,13 +95,20 @@ lang['js'] = {}
 def jsExtract(s):
 	res = {}
 	
+	if not s:
+		return
+	
 	isComment = re.match(r'^(/\*|//)', s) is not None
 	if isComment:
 		return
 		
 	isFn = re.match(r'.*function(\s|\t)*.*(\s|\t)*\(', s)
+	isImport = re.match(r'.*(import|include|require)(\s|\t)*\((?P<id>.*)\)', s)
 	if isFn is not None:
 		res['type'] = 'function'
+		args = re.match(r'.*function(\s|\t)*.*(\s|\t)*\((\s|\t)*(?P<args>([a-zA-Z_$][a-zA-Z0-9_$]*(\s|\t)*,(\s|\t)*)*([a-zA-Z_$][a-zA-Z0-9_$]*)?)(\s|\t)*\)(\s|\t)*\{?', s)
+		if args is not None:
+			res['args'] = args.group('args').split(',')
 		proto = re.match(r'^(?P<parent>..*)\.prototype\.(?P<name>..*)(\s|\t)*=', s)
 		if proto is not None:
 			res['name'] = proto.group('name')
@@ -78,6 +119,11 @@ def jsExtract(s):
 		if fn is not None:
 			res['name'] = fn.group('name')
 			return res
+	
+	elif isImport is not None:
+		res['type'] = 'dependency'
+		res['name'] = isImport.group('id')
+		return res
 	else:
 		res['type'] = 'data'
 		
@@ -139,7 +185,7 @@ def parseCommentCollection(col, tags, decl):
 	reg_str = buildTagParsingRegexp(tags)
 	tag_re = re.compile(reg_str)
 	strip_re = re.compile(r"^(/\*|\*)?\**(?P<let_me_see_you_stripped>.*)(\s|\t)*\**(\*|\*/)?$")
-	count = 0
+	
 	for i in col:
 		e = {}
 		for tag in tags:
@@ -148,7 +194,6 @@ def parseCommentCollection(col, tags, decl):
 		tag_name = None
 		end = False
 		tp = None
-		header = False
 		
 		for j in i:
 			j = j.strip()
@@ -189,27 +234,19 @@ def parseCommentCollection(col, tags, decl):
 			else:
 				j = i[len(i)-1].strip()
 				
-				if not header:
-					found = False
-					if count == 0 and j == '':
-						found = True
-					else:
-						for tp in e:
-							if 'file' in tp:
-								found = True
-					
-					if found:
-						header = True
-						eset['header'] = e['doc'];
-						e = None
+				if 'header' not in e:
+					for tag in e['doc']:
+						if 'file' in tag:
+							eset['header'] = e['doc'];
+							e = None
 				
-				if j != '':
-					fn_info = lang['js'](j)
-					if fn_info is not None and 'name' in fn_info:
-						for f in fn_info:
-							e[f] = fn_info[f]
-					else:
-						e = None
+				
+				fn_info = lang['js'](j)
+				if fn_info is not None and 'name' in fn_info:
+					for f in fn_info:
+						e[f] = fn_info[f]
+				else:
+					e = None
 				#test here if the last line is valid for extraction or is it a file header comment, flag it
 				tag_name = None
 				end = False
@@ -217,11 +254,15 @@ def parseCommentCollection(col, tags, decl):
 		#add it if the last line is valid
 		if e is not None:
 			eset['content'].append(e)
-		count += 1
 	return eset
-	
-uri = 'Map.js'
+
+mdf = open('README.md', 'r')
+md = mdf.read()
+print markdown.markdown(md)
+
+uri = 'Communication.js'
 res = collectComments(uri)
 result = parseCommentCollection(res[1], tags, decl)
 result['header']['uri'] = uri 
-print result
+pp = pprint.PrettyPrinter(indent=4)
+print pp.pprint(result)
