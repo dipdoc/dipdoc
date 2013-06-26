@@ -1,5 +1,5 @@
 /**
- *  @file		IVARTECH Map data class
+ *	@file		IVARTECH Map data class
  *	@author		Nikola Stamatovic Stamat <stamat@ivartech.com>
  *	@copyright	IVARTECH http://ivartech.com
  *	@version	20130313  
@@ -60,8 +60,9 @@ ivar.data.Map = function Map(o) {
 	*	@param	{Map}	map		Map to which values should be cloned
 	*/
 	this.putAll = function(map) {
-		this.clear();
-		this.incorporate(map.entrySet());
+		this.length = map.length;
+		object = map.entrySet();
+		keys = map.keys();
 	};
 
 	/**
@@ -69,8 +70,7 @@ ivar.data.Map = function Map(o) {
 	 *
 	 *	@this	{Map}
 	 *	@param	{string|number}	key		Name of the key under which a value is stored
-	 *	@return	{any}					Returns the value of removed
-	  entry
+	 *	@return	{any}					Returns the value of removed entry
 	 */
 	this.remove = function(k) {
 		if(!ivar.whatis(k) !== 'array')
@@ -119,7 +119,6 @@ ivar.data.Map = function Map(o) {
 	 *	@this	{Map}
 	 *	@param	{number}	id		Order number in keys array
 	 *	@return	{any}				Returns the value stored under the key or null if key isnt found
-	 * $test OMFG
 	 */
 	this.getById = function(id) {
 		return this.get(keys[id]);
@@ -150,8 +149,7 @@ ivar.data.Map = function Map(o) {
 	 *
 	 *	@this	{Map}
 	 *	@param	{any}	value		Value used to find the keyname
-	 *	@return	{string|number}		Returns key name under which given
-	  value is stored
+	 *	@return	{string|number}		Returns key name under which given value is stored
 	 */
 	this.getKey = function(value) {
 		return this.find(value); //SLOW
@@ -230,8 +228,7 @@ ivar.data.Map = function Map(o) {
 	 *
 	 *	@this	{Map}
 	 *	@param 	{Map}	map 			
-	 *	@return	{boolean}				returns true if they a
-	 re identical
+	 *	@return	{boolean}				returns true if they are identical
 	 */
 	this.equals = function(map) {
 		if (this.length != map.length)
@@ -253,10 +250,8 @@ ivar.data.Map = function Map(o) {
 	/**
 	 *	For each entry of the map executes the given function
 	 *
-	 
-	 	@this	{Map}
-	 *	@param 	{function}	function(key,value) 	Given functions
-	 * that receives key and value as arguments
+	 *	@this	{Map}
+	 *	@param 	{function}	function(key,value) 	Given functions that receives key and value as arguments
 	 */
 	this.each = function(fn) {
 		for (var i in object) {
@@ -268,8 +263,7 @@ ivar.data.Map = function Map(o) {
 	 *	Gets key name that holds supplied value
 	 *
 	 *	@this	{Map}
-	 *	@param 	{any}	value	Given value as a search 
-	 *parameter
+	 *	@param 	{any}	value	Given value as a search parameter
 	 */
 	this.find = function(value) {
 		for (var i in object) {

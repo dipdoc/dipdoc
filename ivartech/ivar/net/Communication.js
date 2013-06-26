@@ -6,7 +6,7 @@
  *	
  *	@namespace	ivar.net
  */
-
+ 
 //TODO: PROBLEM!!! Response order!
 /*
 	Let's say we have two same procedure calls on server, first one takes a bit longer to complete, but the second one takes shorter time to load. First response is the one of the second call, and last is the one of the first call. So the last response becomes relevant, but it is not the information up to date.
@@ -14,7 +14,7 @@
 	The solutions to this is to stack calls and wait for responses in order. This has to be modeled carefully.
 	Or to assign a custom callback to each call.
 */
-/**/
+
 //TODO: METHOD EXECUTION PROPERTIES (like: only once(the result is always same), one by one (stack methods, if the response isnt received, dont execute the others), abort). com.register(method, property);
 // What about encapsulating, or making pseudonims for methods with different params! :) This can be valuable.
 //TODO: METHOD WAITTING STACK
@@ -23,12 +23,6 @@
 
 //TODO: Finis file upload, purge jquery form the script
 
-/*
-	Fucking test
-	@todo [ x ] Refactor Maps
-	@todo [!] check Communication.js for errors made by modifying Maps 
-	@todo kill justin
-*/
 ivar.require('ivar.data.Map');
 ivar.require('ivar.patt.Events');
 

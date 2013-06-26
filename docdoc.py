@@ -8,8 +8,12 @@
 # assert can be equal stricEqual deepEqual
 # $assert equal this(m1) params('hello', 1) result(true) Some message for information
 import re
+import json
+import os
+from os.path import join
 import markdown
-import pprint
+
+
 
 tags = [{'pref':'@','name':'doc'},
   	{'pref':'\$','name':'unit'}]
@@ -28,7 +32,7 @@ def stripCurlyBrackets(s):
 	
 def parseParam(s):
 	res = {}
-	prop = re.match('^(\{(?P<type>.*)\})(\s|\t)*(?P<name>(\[(\s|\t)*[a-zA-Z_$][a-zA-Z0-9_$.]*(\s|\t)*(=([0-9.]*|(true|false|undefined|null)|(\{.*\})|(\[.*\])|(".*")|(\'.*\')))?(\s|\t)*\])|([a-zA-Z_$][a-zA-Z0-9_$.]*(\s|\t)*(=([0-9.]*|(true|false|undefined|null)|(\{.*\})|(\[.*\])|(".*")|(\'.*\')))?))(\s|\t)*(?P<text>.*)$', s)
+	prop = re.match('^(\{(?P<type>.*)\})(\s|\t)*(?P<name>(\[(\s|\t)*[a-zA-Z_$][a-zA-Z0-9_$.]*(\s|\t)*(=([0-9.]*|(true|false|undefined|null)|(\{.*\})|(\[.*\])|(".*")|(\'.*\')))?(\s|\t)*\])|([a-zA-Z_$][a-zA-Z0-9_$.]*(\s|\t)*(=([0-9.]*|(true|false|undefined|null)|(\{.*\})|(\[.*\])|(".*")|(\'.*\')))?))(\s|\t)*(?P<description>.*)$', s)
 	if prop is not None:
 		res['type'] = prop.group('type').split('|')
 		res['name'] = prop.group('name').strip()
@@ -37,17 +41,17 @@ def parseParam(s):
 		if mand is not None:
 			res['mandatory'] = True
 			res['name'] = mand.group(1)
-		res['text'] = prop.group('text')
+		res['description'] = prop.group('description')
 		return res
 	
 decl['doc']['param'] = parseParam
 
 def parseReturn(s):
 	res = {}
-	prop = re.match('^(\{(?P<type>.*)\})(\s|\t)*(?P<text>.*)$', s)
+	prop = re.match('^(\{(?P<type>.*)\})(\s|\t)*(?P<description>.*)$', s)
 	if prop is not None:
 		res['type'] = prop.group('type').split('|')
-		res['text'] = prop.group('text')
+		res['description'] = prop.group('description')
 		return res
 		
 decl['doc']['return'] = parseReturn
@@ -55,6 +59,9 @@ decl['doc']['return'] = parseReturn
 decl['doc']['property'] = parseParam
 	
 decl['doc']['this'] = stripCurlyBrackets
+
+decl['doc']['example'] = asIs
+decl['doc']['exampledesc'] = asIs
 
 decl['doc']['description'] = asIs
 decl['doc']['classdesc'] = asIs
@@ -83,11 +90,10 @@ def parseToDo(s):
 			elif c == '!':
 				res['urgent'] = True
 		return res
-	return
 decl['doc']['todo'] = parseToDo
 
 decl['unit']['prepare'] = asIs
-decl['unit']['assert'] = asIs
+decl['unit']['assert'] = asIs #TODO: parse assert
 
 lang = {}
 lang['js'] = {}
@@ -106,9 +112,9 @@ def jsExtract(s):
 	isImport = re.match(r'.*(import|include|require)(\s|\t)*\((?P<id>.*)\)', s)
 	if isFn is not None:
 		res['type'] = 'function'
-		args = re.match(r'.*function(\s|\t)*.*(\s|\t)*\((\s|\t)*(?P<args>([a-zA-Z_$][a-zA-Z0-9_$]*(\s|\t)*,(\s|\t)*)*([a-zA-Z_$][a-zA-Z0-9_$]*)?)(\s|\t)*\)(\s|\t)*\{?', s)
-		if args is not None:
-			res['args'] = args.group('args').split(',')
+		#args = re.match(r'.*function(\s|\t)*.*(\s|\t)*\((\s|\t)*(?P<args>([a-zA-Z_$][a-zA-Z0-9_$]*(\s|\t)*,(\s|\t)*)*([a-zA-Z_$][a-zA-Z0-9_$]*)?)(\s|\t)*\)(\s|\t)*\{?', s)
+		#if args is not None:
+		#	res['args'] = args.group('args').split(',')
 		proto = re.match(r'^(?P<parent>..*)\.prototype\.(?P<name>..*)(\s|\t)*=', s)
 		if proto is not None:
 			res['name'] = proto.group('name')
@@ -180,7 +186,7 @@ def buildTagParsingRegexp(l):
 		res.append(r'(^(?P<'+i['name']+'>'+i['pref']+'[\w]+)(\s|\t)*(?P<'+i['name']+'_rest>.*))');
 	return r'|'.join(res)
 
-def parseCommentCollection(col, tags, decl):
+def parseCommentCollection(col, tags, decl, extension):
 	eset = {'header':{}, 'content':[]}
 	reg_str = buildTagParsingRegexp(tags)
 	tag_re = re.compile(reg_str)
@@ -202,7 +208,7 @@ def parseCommentCollection(col, tags, decl):
 				
 			st = strip_re.match(j)
 			if st is not None:
-				j = st.group('let_me_see_you_stripped').strip()
+				j = st.group('let_me_see_you_stripped').strip() #rammstein version
 			
 			s = tag_re.match(j)
 			if s is not None:
@@ -221,37 +227,44 @@ def parseCommentCollection(col, tags, decl):
 					if tag_name not in e[tp]:
 						e[tp][tag_name] = []
 					if tag_name in decl[tp] and s is not None:
-						e[tp][tag_name].append(decl[tp][tag_name](s.group(tp+'_rest')))
+						res = decl[tp][tag_name](s.group(tp+'_rest'))
+						if res is not None:
+							e[tp][tag_name].append(res)
 					
-					ln = len(e[tp][tag_name])
-					if s is None: 
+					if s is None:
+						ln = len(e[tp][tag_name])
 						if ln > 0:
-							e[tp][tag_name][ln-1] += '\n'+j 
+							dtype = type(e[tp][tag_name][ln-1])
+							if dtype is dict and 'description' in e[tp][tag_name][ln-1]:
+								e[tp][tag_name][ln-1]['description']+= '\n'+j
+							elif dtype is str:	
+								e[tp][tag_name][ln-1]+= '\n'+j
 						else:
 							e[tp][tag_name].append(j)
+							
 							
 			
 			else:
 				j = i[len(i)-1].strip()
+				tag_name = None
+				end = False
 				
 				if 'header' not in e:
 					for tag in e['doc']:
 						if 'file' in tag:
 							eset['header'] = e['doc'];
 							e = None
+							break
 				
-				
-				fn_info = lang['js'](j)
+				fn_info = lang[extension](j)
 				if fn_info is not None and 'name' in fn_info:
 					for f in fn_info:
 						e[f] = fn_info[f]
 				else:
 					e = None
-				#test here if the last line is valid for extraction or is it a file header comment, flag it
-				tag_name = None
-				end = False
-				break
-		#add it if the last line is valid
+				
+				break	
+					
 		if e is not None:
 			eset['content'].append(e)
 	return eset
@@ -260,9 +273,45 @@ mdf = open('README.md', 'r')
 md = mdf.read()
 print markdown.markdown(md)
 
-uri = 'Communication.js'
-res = collectComments(uri)
-result = parseCommentCollection(res[1], tags, decl)
-result['header']['uri'] = uri 
-pp = pprint.PrettyPrinter(indent=4)
-print pp.pprint(result)
+def doFile(root, uri, collector, extension='js'):
+	ext = '.'+extension
+	if uri.endswith(ext):
+		iden = '.'.join(uri[len(root)+1:-len(ext)].split(os.sep))
+		res = collectComments(uri)
+		result = parseCommentCollection(res[1], tags, decl, extension)
+		if not result['content'] and not result['header']:
+			return
+		result['header']['uri'] = uri
+		result['header']['id'] = iden
+		collector[iden] = result
+
+def outputResult(uri, collector):
+	f = open(uri, 'w')
+	f.write('var docdoc = '+json.dumps(collector,indent=4))
+	f.close()
+	
+def run(url, skip, exclude_hidden=True):
+	data = {}
+	for root, dirs, files in os.walk(url):
+		loc = root[len(url)+1:]
+		
+		if exclude_hidden:
+			for d in dirs:
+				if d.startswith('.'):
+					dirs.remove(d)
+		
+		if loc in skip:
+			for d in dirs:
+				dirs.remove(d)
+			continue
+			
+		for f in files:
+			fpath = os.path.join(root, f)
+			locfpath = os.path.join(loc, f)
+			if locfpath in skip:
+				continue
+			doFile(url, fpath, data)
+	#XXX: only temporary
+	outputResult('docdoc.json', data)
+
+run('ivartech', ['third-party','plugins'])
