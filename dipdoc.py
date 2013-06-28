@@ -153,121 +153,135 @@ def jsExtract(s):
 
 lang['js'] = jsExtract
 
-def collectComments(uri, pref='/*', suf='*/'):
-	a = []
-	temp = []
-	flag = False
-	one_more = False
-	
-	f = open(uri, 'r')
-	for line in f:
-
-		line = line.strip()
-	
-		if line.startswith(pref):
-			flag = True;
-		
-		if flag:
-			temp.append(line)
-		
-		if one_more:
-			one_more = False
-			flag = False
-			a.append(temp)
-			temp = []
-	
-		if line.startswith(suf):
-			one_more = True;
-	return uri,a
-
 def buildTagParsingRegexp(l):
 	res = []
 	for i in l:
-		res.append(r'(^(?P<'+i['name']+'>'+i['pref']+'[\w]+)(\s|\t)*(?P<'+i['name']+'_rest>.*))');
+		res.append(r'((?P<'+i['name']+'>'+i['pref']+'[\w]+)(\s|\t)*(?P<'+i['name']+'_rest>.*))');
 	return r'|'.join(res)
 
-def parseCommentCollection(col, tags, decl, extension):
+#this function should unite the two above
+def getCommentData(uri, tags, decl, extension='js',pref='/*', suf='*/'):
 	eset = {'header':{}, 'content':[]}
 	reg_str = buildTagParsingRegexp(tags)
 	tag_re = re.compile(reg_str)
 	strip_re = re.compile(r"^(/\*|\*)?\**(?P<let_me_see_you_stripped>.*)(\s|\t)*\**(\*|\*/)?$")
 	
-	for i in col:
-		e = {}
-		for tag in tags:
-			e[tag['name']] = {}
-		
-		tag_name = None
-		end = False
-		tp = None
-		
-		for j in i:
-			j = j.strip()
-			if not end:
-				end = re.match(r'\*/$', j) is not None
-				
-			st = strip_re.match(j)
-			if st is not None:
-				j = st.group('let_me_see_you_stripped').strip() #rammstein version
-			
-			s = tag_re.match(j)
-			if s is not None:
-				for tag in tags:
-					if s.group(tag['name']) is not None:
-						tp = tag['name']
-						break
+	flag = False
+	one_more = False
+	first = None
+	e = {}
+	
+	f = open(uri, 'r')
+	for line in f:
 
-				tag_name = s.group(tp)[1:]
+		line = line.strip()
+		stripped = line
+		
+		if line.startswith(pref):
+			flag = True;
+			e = {}
+			for tag in tags:
+				e[tag['name']] = {}
+		
+			tag_name = None
+			tp = None
 			
-			if not end:
-				if tag_name is None:
-					tag_name = 'description'
-					tp = 'doc'
-				if j is not '':
-					if tag_name not in e[tp]:
-						e[tp][tag_name] = []
-					if tag_name in decl[tp] and s is not None:
-						res = decl[tp][tag_name](s.group(tp+'_rest'))
-						if res is not None:
-							e[tp][tag_name].append(res)
-					
-					if s is None:
-						ln = len(e[tp][tag_name])
-						if ln > 0:
-							dtype = type(e[tp][tag_name][ln-1])
-							if dtype is dict and 'description' in e[tp][tag_name][ln-1]:
-								e[tp][tag_name][ln-1]['description']+= '\n'+j
-							elif dtype is str:	
-								e[tp][tag_name][ln-1]+= '\n'+j
-						else:
-							e[tp][tag_name].append(j)
-							
-							
+		
+		#each comment line
+		if flag and not one_more:
+		
+			st = strip_re.match(line)
+			if st is not None:
+				stripped = st.group('let_me_see_you_stripped').strip() #rammstein version
 			
-			else:
-				j = i[len(i)-1].strip()
-				tag_name = None
-				end = False
 				
-				if 'header' not in e:
+			if tag_name is None:
+				tag_name = 'description'
+				tp = 'doc'
+				
+			tag_data = parseCommentLine(stripped, tags, tag_re)
+			
+			if tag_data is not None:
+				tp = tag_data['type']
+				tag_name = tag_data['name']	
+
+			if tag_name not in e[tp]:
+				e[tp][tag_name] = []
+			if tag_data is not None and tag_name in decl[tp]:
+				res = decl[tp][tag_name](tag_data['rest'])
+				if res is not None:
+					e[tp][tag_name].append(res)
+		
+			if tag_data is None:
+				ln = len(e[tp][tag_name])
+				if ln > 0:
+					dtype = type(e[tp][tag_name][ln-1])
+					if dtype is dict and 'description' in e[tp][tag_name][ln-1]:
+						e[tp][tag_name][ln-1]['description']+= '\n'+stripped
+					elif dtype is str:	
+						e[tp][tag_name][ln-1]+= '\n'+stripped
+				else:
+					e[tp][tag_name].append(stripped)
+		
+		#On last line, that usualy contains the function, class or data related to the documentation
+		if one_more:
+			
+			if 'doc' in e and 'description' in e['doc']:
+				for i, el in enumerate(e['doc']['description']):
+					e['doc']['description'][i] = e['doc']['description'][i].strip('\n')
+				e['doc']['excerpt'] = e['doc']['description'][0].split('\n')[0]
+			
+			if first is None and e is not None and e['doc'] is not None:
+				first = e['doc']
+			if not eset['header']:
+				if e is not None:
 					for tag in e['doc']:
 						if 'file' in tag:
 							eset['header'] = e['doc'];
 							e = None
 							break
+			
+			fn_info = lang[extension](stripped)
+			if fn_info is not None and 'name' in fn_info:
+				for f in fn_info:
+					e[f] = fn_info[f]
+			else:
+				e = None
+			
+			if flag and e is not None:
+				eset['content'].append(e)
 				
-				fn_info = lang[extension](j)
-				if fn_info is not None and 'name' in fn_info:
-					for f in fn_info:
-						e[f] = fn_info[f]
-				else:
-					e = None
 				
-				break	
-					
-		if e is not None:
-			eset['content'].append(e)
+			one_more = False
+			flag = False
+			
+		
+		if line.endswith(suf):
+			one_more = True;
+	
+	if not eset['header'] and first is not None:
+		if 'file' not in first:
+			first['file'] = first['description']
+		eset['header'] = first
+		
 	return eset
+
+def parseCommentLine(line, tags, tag_re):
+	res = {
+		'type': None,
+		'name': None,
+		'rest': None
+	}
+	s = tag_re.match(line)
+	if s is not None:
+		for tag in tags:
+			if s.group(tag['name']) is not None:
+				res['type'] = tag['name']
+				break
+		res['name'] = s.group(res['type'])[1:]
+		res['rest'] = s.group(res['type']+'_rest')
+		
+		return res
 
 mdf = open('README.md', 'r')
 md = mdf.read()
@@ -276,9 +290,10 @@ print markdown.markdown(md)
 def doFile(root, uri, collector, extension='js'):
 	ext = '.'+extension
 	if uri.endswith(ext):
-		iden = '.'.join(uri[len(root)+1:-len(ext)].split(os.sep))
-		res = collectComments(uri)
-		result = parseCommentCollection(res[1], tags, decl, extension)
+		iden = '.'.join(uri[len(root):-len(ext)].split(os.sep))
+		#res = collectComments(uri)
+		#result = parseCommentCollection(res[1], tags, decl, extension)
+		result = getCommentData(uri, tags, decl, extension)
 		if not result['content'] and not result['header']:
 			return
 		result['header']['uri'] = uri
@@ -287,14 +302,19 @@ def doFile(root, uri, collector, extension='js'):
 
 def outputResult(uri, collector):
 	f = open(uri, 'w')
-	f.write('var docdoc = '+json.dumps(collector,indent=4))
+	f.write('var dipdoc = '+json.dumps(collector,indent=4))
 	f.close()
 	
-def run(url, skip, exclude_hidden=True):
+def run(lang, url, skip, exclude_hidden=True):
 	data = {}
+	modskip = []
+	for i in skip:
+		modskip.append(os.path.join(url, i))
+	skip = modskip
+	print skip
 	for root, dirs, files in os.walk(url):
-		loc = root[len(url)+1:]
-		
+		loc = root
+		print root
 		if exclude_hidden:
 			for d in dirs:
 				if d.startswith('.'):
@@ -310,8 +330,15 @@ def run(url, skip, exclude_hidden=True):
 			locfpath = os.path.join(loc, f)
 			if locfpath in skip:
 				continue
-			doFile(url, fpath, data)
+			doFile(url, fpath, data, lang)
+	
+	container = {}
+	container['data'] = data
+	container['details'] = {}
+	container['details']['lang'] = lang
+	container['details']['root'] = url
+	
 	#XXX: only temporary
-	outputResult('docdoc.json', data)
+	outputResult('dipdoc.json', container)
 
-run('ivartech', ['third-party','plugins'])
+run('js','ivartech', ['third-party','plugins'])
