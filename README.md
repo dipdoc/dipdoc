@@ -1,4 +1,4 @@
-docdoc
+![DipDoc - Ultimate Source code documentation and unit testing](logo.png)
 ======
 
-DocDoc - JSDOC + Unit Tests 
+DipDoc - Ultimate Source code documentation and unit testing
