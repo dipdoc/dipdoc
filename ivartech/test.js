@@ -18,6 +18,18 @@ function assertTrue(bool) {
 function test() {
 	ivar.echo(a);
 	ivar.echo(b);
+	
+	var m = new ivar.data.Map({a: 1, b: 2, c:3, f:4, g:5, e:6});
+	m.sort()
+	while(m.hasNext()) {
+		console.log(m.nextKey());
+		console.log(m.next());
+	}
+	
+	while(m.hasPrevious()) {
+		console.log(m.previousKey());
+		console.log(m.previous());
+	}
 }
 
 function asd() {

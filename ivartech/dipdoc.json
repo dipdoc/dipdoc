@@ -1,0 +1,1985 @@
+var dipdoc = {
+    "js": {
+        "data": {
+            ".ivar.data.JXON": {
+                "content": [], 
+                "header": {
+                    "id": ".ivar.data.JXON", 
+                    "excerpt": "\\", 
+                    "description": [
+                        "\\\n|*|\n|*|  JXON framework - Copyleft 2011 by Mozilla Developer Network\n|*|\n|*|  https://developer.mozilla.org/en-US/docs/JXON\n|*|\n|*|\n|*|\t\tJXON.toJSON(xml);\n|*|\t\tJXON.toXML(json);\n\\*/"
+                    ], 
+                    "file": [
+                        "\\\n|*|\n|*|  JXON framework - Copyleft 2011 by Mozilla Developer Network\n|*|\n|*|  https://developer.mozilla.org/en-US/docs/JXON\n|*|\n|*|\n|*|\t\tJXON.toJSON(xml);\n|*|\t\tJXON.toXML(json);\n\\*/"
+                    ], 
+                    "uri": "dipdoc/ivartech/ivar/data/JXON.js"
+                }
+            }, 
+            ".ivar.html": {
+                "content": [], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "excerpt": "", 
+                    "uri": "dipdoc/ivartech/ivar/html.js", 
+                    "param": [
+                        "/"
+                    ], 
+                    "file": [
+                        ""
+                    ], 
+                    "id": ".ivar.html"
+                }
+            }, 
+            ".ivar.data.Stack": {
+                "content": [], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "copyright": [
+                        "IVARTECH http://ivartech.com"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat <stamat@ivartech.com>"
+                    ], 
+                    "excerpt": "", 
+                    "namespace": [
+                        "ivar\n/"
+                    ], 
+                    "uri": "dipdoc/ivartech/ivar/data/Stack.js", 
+                    "version": [
+                        "20130623\n"
+                    ], 
+                    "file": [
+                        "Stack.js simple stack data structure"
+                    ], 
+                    "id": ".ivar.data.Stack"
+                }
+            }, 
+            ".ivar.data.jules": {
+                "content": [], 
+                "header": {
+                    "file": [
+                        "jules.js\nJULES - (another) JavaScript Schema Validator\nEzekiel 25:17"
+                    ], 
+                    "description": [
+                        "jules.js\nJULES - (another) JavaScript Schema Validator\nEzekiel 25:17"
+                    ], 
+                    "copyright": [
+                        "IVARTECH < http://ivartech.com >"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat < stamat@ivartech.com >"
+                    ], 
+                    "since": [
+                        "/"
+                    ], 
+                    "excerpt": "jules.js", 
+                    "uri": "dipdoc/ivartech/ivar/data/jules.js", 
+                    "licence": [
+                        "MIT"
+                    ], 
+                    "id": ".ivar.data.jules"
+                }
+            }, 
+            ".ivar.search": {
+                "content": [
+                    {
+                        "parent": "ivar.search.", 
+                        "doc": {
+                            "description": [
+                                ""
+                            ], 
+                            "excerpt": "", 
+                            "uri": "dipdoc/ivartech/ivar/search.js", 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "name": "sorted=true", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "number", 
+                                        "string"
+                                    ], 
+                                    "name": "field", 
+                                    "description": ""
+                                }
+                            ], 
+                            "file": [
+                                ""
+                            ], 
+                            "todo": [
+                                {
+                                    "urgent": false, 
+                                    "task": "TEST", 
+                                    "complete": false
+                                }
+                            ], 
+                            "id": ".ivar.search"
+                        }, 
+                        "type": "function", 
+                        "name": "quickSearch ", 
+                        "unit": {}
+                    }
+                ], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "excerpt": "", 
+                    "uri": "dipdoc/ivartech/ivar/search.js", 
+                    "param": [
+                        {
+                            "mandatory": true, 
+                            "type": [
+                                "boolean"
+                            ], 
+                            "name": "sorted=true", 
+                            "description": ""
+                        }, 
+                        {
+                            "mandatory": true, 
+                            "type": [
+                                "number", 
+                                "string"
+                            ], 
+                            "name": "field", 
+                            "description": ""
+                        }
+                    ], 
+                    "file": [
+                        ""
+                    ], 
+                    "todo": [
+                        {
+                            "urgent": false, 
+                            "task": "TEST", 
+                            "complete": false
+                        }
+                    ], 
+                    "id": ".ivar.search"
+                }
+            }, 
+            ".ivar.net.Communication": {
+                "content": [
+                    {
+                        "parent": "ivar.net.", 
+                        "doc": {
+                            "description": [
+                                ""
+                            ], 
+                            "excerpt": "", 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "options", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.url", 
+                                    "description": "URL of server side interface"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "name": "options.async=true", 
+                                    "description": "Should a request be asynchronous or not"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.method='GET'", 
+                                    "description": "HTTP method GET, POST, PUT, DELETE"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.content_type='application/json'", 
+                                    "description": "Content MIME type json|rest|xml| image|file..."
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.user", 
+                                    "description": "User name for HTTP auth"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.password", 
+                                    "description": "User password for HTTP auth"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "name": "history", 
+                                    "description": "\n"
+                                }
+                            ], 
+                            "constructor": [], 
+                            "classdesc": [
+                                "Class that is used to efficiently and easily enable communication with the server side through XMLHttpRequest {@link https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest}, with error feedback, event system, debug history, and many other features\n"
+                            ], 
+                            "property": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "Map"
+                                    ], 
+                                    "name": "registered", 
+                                    "description": "Map of all registered request objects where key is the name of the method invoked on server"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "Map"
+                                    ], 
+                                    "name": "sent", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "Map"
+                                    ], 
+                                    "name": "received", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "Map"
+                                    ], 
+                                    "name": "unsuccessful", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "defaults", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "name": "defaults.async=", 
+                                    "description": "true"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "defaults.method=", 
+                                    "description": "'GET'"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "defaults.content_type=", 
+                                    "description": "'application/json'"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "name": "history", 
+                                    "description": "\n/"
+                                }
+                            ], 
+                            "todo": [
+                                {
+                                    "urgent": false, 
+                                    "task": "Add file upload methods, form submission , and Image download methods. REST and XML-RPC conversions. SOAP? Multi method calls on server, multi responses...", 
+                                    "complete": false
+                                }
+                            ], 
+                            "class": []
+                        }, 
+                        "type": "function", 
+                        "name": "Communication ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.net.Communication", 
+                        "doc": {
+                            "excerpt": "Applies new options to the default template", 
+                            "description": [
+                                "Applies new options to the default template"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "options", 
+                                    "description": "\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "applyOptions ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.net.Communication", 
+                        "doc": {
+                            "excerpt": "Registers a method to be called with all of it's constant options. Options that are not constant are request.params. If only a string is passed it becomes a method name request.method. Method can be further called Communication.nameOfMethod();", 
+                            "description": [
+                                "Registers a method to be called with all of it's constant options. Options that are not constant are request.params. If only a string is passed it becomes a method name request.method. Method can be further called Communication.nameOfMethod();"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "object"
+                                    ], 
+                                    "name": "obj", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "obj.request", 
+                                    "description": "JSON-RPC formed request: method name and params"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "obj.request.id", 
+                                    "description": "Request UID string if not supplied it is automatically generated"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.request.method", 
+                                    "description": "Name of the method to be invoked on server"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "obj.request.params", 
+                                    "description": "Request data to be submitted to method on server as its parameters"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.uri", 
+                                    "description": "URI of server side interface"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "name": "obj.async=true", 
+                                    "description": "Should a request be asynchronous or not"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.method='GET'", 
+                                    "description": "HTTP method GET, POST, PUT, DELETE"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.content_type='application/json'", 
+                                    "description": "Content MIME type json|rest|xml| image|file..."
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.user", 
+                                    "description": "User name for HTTP auth"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.password", 
+                                    "description": "User password for HTTP auth\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "register ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.net.Communication", 
+                        "doc": {
+                            "excerpt": "Removes already registered function so it can't be called anymore", 
+                            "description": [
+                                "Removes already registered function so it can't be called anymore"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "method_name", 
+                                    "description": "\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "unregister ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.net.Communication", 
+                        "doc": {
+                            "excerpt": "Send function of the communication class, used to send request to server", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "If sending is successful or not\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Send function of the communication class, used to send request to server"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "options", 
+                                    "description": "Option object containing request data"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "options.request", 
+                                    "description": "JSON-RPC formed request: method name and params"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "options.request.id", 
+                                    "description": "Request UID string if not supplied it is automatically generated"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.request.method", 
+                                    "description": "Name of the method to be invoked on server"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "options.request.params", 
+                                    "description": "Request data to be submitted to method on server as its parameters"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.uri", 
+                                    "description": "URI of server side interface"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "name": "options.async=true", 
+                                    "description": "Should a request be asynchronous or not"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.method='GET'", 
+                                    "description": "HTTP method GET, POST, PUT, DELETE"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.content_type='application/json'", 
+                                    "description": "Content MIME type json|rest|xml| image|file..."
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.user", 
+                                    "description": "User name for HTTP auth"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "options.password", 
+                                    "description": "User password for HTTP auth\n"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "send ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.net.Communication", 
+                        "doc": {
+                            "excerpt": "Method that is triggered upon receiving response from the server, It checks HTTP response status and parses it accordingly", 
+                            "todo": [
+                                {
+                                    "urgent": false, 
+                                    "task": "Support for xml response format.", 
+                                    "complete": false
+                                }
+                            ], 
+                            "description": [
+                                "Method that is triggered upon receiving response from the server, It checks HTTP response status and parses it accordingly"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "obj", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "number"
+                                    ], 
+                                    "name": "obj.status", 
+                                    "description": "XMLHttpRequest.status"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.date", 
+                                    "description": "XMLHttpRequest.getResponseHeader('Date')"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.response_text", 
+                                    "description": "XMLHttpRequest.responseText"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "obj.response_type", 
+                                    "description": "XMLHttpRequest.getResponseHeader('Content-Type')"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "obj.id", 
+                                    "description": "Identificator of the request object\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "receive ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.net.Communication", 
+                        "doc": {
+                            "excerpt": "Method that is called when send|receive methods fail for some reason. It stores request object into unsuccessful map.", 
+                            "description": [
+                                "Method that is called when send|receive methods fail for some reason. It stores request object into unsuccessful map."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "obj", 
+                                    "description": "Request object described in the send method options {@see ivar.util.Communication.send}"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "err", 
+                                    "description": "Error message"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "name": "store=true", 
+                                    "description": "If store is true object will be stored to unsuccessful Map\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "failed ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.net.Communication", 
+                        "doc": {
+                            "excerpt": "Resends unsuccessful request based on provided request id", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "Returns true if successful\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Resends unsuccessful request based on provided request id"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "id", 
+                                    "description": "Identificator of unsuccessful request object"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "resend ", 
+                        "unit": {}
+                    }
+                ], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "copyright": [
+                        "IVARTECH http://ivartech.com"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat <stamat@ivartech.com>"
+                    ], 
+                    "excerpt": "", 
+                    "namespace": [
+                        "ivar.net\n/"
+                    ], 
+                    "uri": "dipdoc/ivartech/ivar/net/Communication.js", 
+                    "version": [
+                        "20130313\n"
+                    ], 
+                    "file": [
+                        "IVARTECH Communication class, for client to server AJAX comunication"
+                    ], 
+                    "id": ".ivar.net.Communication"
+                }
+            }, 
+            ".ivar.data.Map": {
+                "content": [
+                    {
+                        "parent": "ivar.data.", 
+                        "doc": {
+                            "description": [
+                                ""
+                            ], 
+                            "excerpt": "", 
+                            "constructor": [], 
+                            "classdesc": [
+                                "Map class similar to Java Map, providing methods for efficient usage of traditional key-value hash table storage\n"
+                            ], 
+                            "property": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "number"
+                                    ], 
+                                    "name": "length", 
+                                    "description": "Length of the map, like array length. Even though keys.length would do fine, this is kept for elegance"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "object", 
+                                    "description": "Object that contains key-value pairs"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "array"
+                                    ], 
+                                    "name": "keys", 
+                                    "description": "Array containing key names used as keys in object to enable getFirst and getLast functionality\n/"
+                                }
+                            ], 
+                            "class": []
+                        }, 
+                        "type": "function", 
+                        "name": "Map ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Stores key and value to map object", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "description": "Returns the key value\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Stores key and value to map object"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "key", 
+                                    "description": "A value that represents key for value retrieval"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": "A value marked with the correspondent key"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "put ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Clones another map's values to this map", 
+                            "description": [
+                                "Clones another map's values to this map"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "Map"
+                                    ], 
+                                    "name": "map", 
+                                    "description": "Map to which values should be cloned\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "putAll ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Removes the map entry by given key", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "description": "Returns the value of removed entry\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Removes the map entry by given key"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "key", 
+                                    "description": "Name of the key under which a value is stored"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "remove ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Gets the value stored under given key", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "description": "Returns the value stored under the key or undefined if key isnt found\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Gets the value stored under given key"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "key", 
+                                    "description": "A value that represents key for value retrieval"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "get ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Gets the value stored under given order number", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "description": "Returns the value stored under the key or null if key isnt found\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Gets the value stored under given order number"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "number"
+                                    ], 
+                                    "name": "id", 
+                                    "description": "Order number in keys array"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "getById ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Gets the value stored under the last entered key", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "description": "Returns the value stored under the key or null if key isn't found\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Gets the value stored under the last entered key"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "getLast ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Gets the value stored under the first entered key", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "description": "Returns the value stored under the key or null if key isn't found\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Gets the value stored under the first entered key"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "getFirst ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Gets a key name labeling the given value", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "description": "Returns key name under which given value is stored\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Gets a key name labeling the given value"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": "Value used to find the keyname"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "getKey ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Gets this map's object containing keys and values", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "description": "object containing keys and values\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Gets this map's object containing keys and values"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "entrySet ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Checks if the map is empty", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "returns true if Map is empty, otherwise false.\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Checks if the map is empty"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "isEmpty ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Does the map contain given key?", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "returns true if the given key exists in the map\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Does the map contain given key?"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "key", 
+                                    "description": ""
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "hasKey ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Does the map contain given value?", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "returns true if the given value exists in the map\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Does the map contain given value?"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": ""
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "hasValue ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Returns list of all entry keys in the map", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "array"
+                                    ], 
+                                    "description": "returns array of keys\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Returns list of all entry keys in the map"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "keys ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Returns list of all entry values in the map. SLOW! O(n)", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "array"
+                                    ], 
+                                    "description": "returns array of values\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Returns list of all entry values in the map. SLOW! O(n)"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "values ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Checks if an other map is identical to this one!", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "returns true if they are identical\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Checks if an other map is identical to this one!\nCan be very slow if they have same keys and number of entries."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "Map"
+                                    ], 
+                                    "name": "map", 
+                                    "description": ""
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "equals ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map\n/"
+                            ], 
+                            "excerpt": "Resets the contents of the map to empty state", 
+                            "description": [
+                                "Resets the contents of the map to empty state"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "clear ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "For each entry of the map executes the given function", 
+                            "description": [
+                                "For each entry of the map executes the given function"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "function"
+                                    ], 
+                                    "name": "function", 
+                                    "description": "(key,value) \tGiven functions that receives key and value as arguments\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "each ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "this": [
+                                "Map"
+                            ], 
+                            "excerpt": "Gets key name that holds supplied value", 
+                            "description": [
+                                "Gets key name that holds supplied value"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": "Given value as a search parameter\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "find ", 
+                        "unit": {}
+                    }
+                ], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "copyright": [
+                        "IVARTECH http://ivartech.com"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat <stamat@ivartech.com>"
+                    ], 
+                    "excerpt": "", 
+                    "namespace": [
+                        "ivar.data\n/"
+                    ], 
+                    "uri": "dipdoc/ivartech/ivar/data/Map.js", 
+                    "version": [
+                        "20130313\n"
+                    ], 
+                    "file": [
+                        "IVARTECH Map data class"
+                    ], 
+                    "id": ".ivar.data.Map"
+                }
+            }, 
+            ".ivar.draw.filter": {
+                "content": [], 
+                "header": {
+                    "description": [
+                        "Canvas filter engine"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat"
+                    ], 
+                    "since": [
+                        ""
+                    ], 
+                    "excerpt": "Canvas filter engine", 
+                    "uri": "dipdoc/ivartech/ivar/draw/filter.js", 
+                    "file": [
+                        "Canvas filter engine"
+                    ], 
+                    "todo": [
+                        {
+                            "urgent": false, 
+                            "task": ": test, organize, comment the fucking code! Exclude jquery! :D", 
+                            "complete": false
+                        }
+                    ], 
+                    "id": ".ivar.draw.filter"
+                }
+            }, 
+            ".main": {
+                "content": [
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "Checks if the variable is set or exists", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Checks if the variable is set or exists"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "val", 
+                                    "description": "Any variable or property"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "isSet ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "Checks if the variable is empty. Array with the length of 0,", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Checks if the variable is empty. Array with the length of 0,\nempty string or empty object."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "array", 
+                                        "object", 
+                                        "string"
+                                    ], 
+                                    "name": "obj", 
+                                    "description": "Any variable or property"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "isEmpty ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "System out print regular information shortcut. Prints to console or alert", 
+                            "description": [
+                                "System out print regular information shortcut. Prints to console or alert\nif console is unavailable."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "e", 
+                                    "description": "Message in a form of a string or any other object that can be presented in console\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "echo ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "System out print warning information shortcut. Prints to console or alert", 
+                            "description": [
+                                "System out print warning information shortcut. Prints to console or alert\nif console is unavailable."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "e", 
+                                    "description": "Message in a form of a string or any other object that can be presented in console\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "warn ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "System out print error information shortcut. Prints to console or alert", 
+                            "description": [
+                                "System out print error information shortcut. Prints to console or alert\nif console is unavailable."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "e", 
+                                    "description": "Message in a form of a string or any other object that can be presented in console\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "error ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "System out print. Prints to console or alert", 
+                            "description": [
+                                "System out print. Prints to console or alert\nif console is unavailable."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "fn", 
+                                    "description": "Function name of console object: log, warn, error..."
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "msg", 
+                                    "description": "Message in a form of a string or any other object that can be presented in console. Or if other arguments are present it is used as a label of set of console outputs\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "systemMessage ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "Compares two objects", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "True if equal\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Compares two objects"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "a", 
+                                    "description": "Any object with properties"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "b", 
+                                    "description": "Any object with properties"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "compareObjects ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "doc": {
+                            "excerpt": "Are two values equal, deep compare for objects and arrays.", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "Are equal?\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Are two values equal, deep compare for objects and arrays."
+                            ], 
+                            "param": []
+                        }, 
+                        "type": "function", 
+                        "name": "equal ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "Extends properties of a second object into first, overwriting all of it's properties if", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "description": "Returns cloned object\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Extends properties of a second object into first, overwriting all of it's properties if\nthey have same properties. Used for loading options."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "extended", 
+                                    "description": "First object to be extended"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "extender", 
+                                    "description": "Second object extending the first one"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "number[0", 
+                                        "1]", 
+                                        "boolean"
+                                    ], 
+                                    "name": "clone", 
+                                    "description": "First or the second object"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "extend ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "\"Short\" for loop. Should force me to separate inner loops into functions.", 
+                            "description": [
+                                "\"Short\" for loop. Should force me to separate inner loops into functions."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "number"
+                                    ], 
+                                    "name": "times", 
+                                    "description": "Number of times to spin the function"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "function"
+                                    ], 
+                                    "name": "fn", 
+                                    "description": "Function to be spun for the given number of times"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "number"
+                                    ], 
+                                    "name": "step=1", 
+                                    "description": "Direction of loop depending on positive or negative value, increases or decreases count by given step\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "loop ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "copyleft": [
+                                ""
+                            ], 
+                            "excerpt": "Parses string value into correct javascript data type", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "null", 
+                                        "boolean", 
+                                        "number", 
+                                        "date"
+                                    ], 
+                                    "description": "\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Parses string value into correct javascript data type"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string"
+                                    ], 
+                                    "name": "sValue", 
+                                    "description": ""
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "parseText ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar._private.", 
+                        "doc": {
+                            "excerpt": "===============================================================================", 
+                            "description": [
+                                "===============================================================================\nCrc32 is a JavaScript function for computing the CRC32 of a string\n...............................................................................\n\nVersion: 1.2 - 2006/11 - http://noteslog.com/category/javascript/\n\n-------------------------------------------------------------------------------\nCopyright (c) 2006 Andrea Ercolino\nhttp://www.opensource.org/licenses/mit-license.php\n===============================================================================\n/"
+                            ]
+                        }, 
+                        "type": "data", 
+                        "name": "crc32_table ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.", 
+                        "doc": {
+                            "excerpt": "Number */", 
+                            "description": [
+                                "Number */"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "crc32 ", 
+                        "unit": {}
+                    }
+                ], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "copyright": [
+                        "IVARTECH http://ivartech.com"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat <stamat@ivartech.com>"
+                    ], 
+                    "excerpt": "", 
+                    "namespace": [
+                        "ivar\n/"
+                    ], 
+                    "uri": "dipdoc/ivartech/main.js", 
+                    "version": [
+                        "20130313\n"
+                    ], 
+                    "file": [
+                        "IVARTECH JavaScript Library - main class"
+                    ], 
+                    "id": ".main"
+                }
+            }, 
+            ".ivar.patt.Events": {
+                "content": [
+                    {
+                        "parent": "ivar.patt.", 
+                        "doc": {
+                            "description": [
+                                ""
+                            ], 
+                            "excerpt": "", 
+                            "constructor": [], 
+                            "classdesc": [
+                                "Events class enables you to stack functions under a single name to be executed when that name is called from anywhere in the program. Functions can be passed arguments when firing an event.\n"
+                            ], 
+                            "property": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "list", 
+                                    "description": "Contains the event names paired with arrays of functions"
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "array"
+                                    ], 
+                                    "name": "event_names", 
+                                    "description": "Contains all the event names\n/"
+                                }
+                            ], 
+                            "class": []
+                        }, 
+                        "type": "function", 
+                        "name": "Events ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Binds a single function or an array of functions to an event name", 
+                            "description": [
+                                "Binds a single function or an array of functions to an event name\n\nvar me = new ivar.patt.Events();\nme.bind(['foo','bar','baz'], function(){\nprint('foo%bar%baz');\n});\n\nme.bind(['foo','baz'], function(){\nprint('foo%baz');\n});\n\nme.bind(['baz','bar'], function(){\nprint('baz%bar');\n});\n\nivar.print(me);\nme.fire('foo');\nme.unbind(['bar','baz']);\nme.fire('baz');\nme.fire('bar');"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "function", 
+                                        "array[function,...]"
+                                    ], 
+                                    "name": "func", 
+                                    "description": "(...)\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "bind ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Removes a certain function or array of functions from an event, thus disabling them to be fired", 
+                            "description": [
+                                "Removes a certain function or array of functions from an event, thus disabling them to be fired"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "function", 
+                                        "array[function,...]"
+                                    ], 
+                                    "name": "func", 
+                                    "description": "(...)\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "unbind ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions.", 
+                            "description": [
+                                "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": "\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "fire ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Returns an array of all of the names of events that can be fired", 
+                            "description": [
+                                "Returns an array of all of the names of events that can be fired"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": "\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "getBound ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Removes an event by given event name with all bound functions", 
+                            "description": [
+                                "Removes an event by given event name with all bound functions"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": false, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": "\n/"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "clearBound ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Removes all entries and restores the object to null state", 
+                            "description": [
+                                "Removes all entries and restores the object to null state\n/"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "clear ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Returns length|size, that is number of events", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "number"
+                                    ], 
+                                    "description": "\n/"
+                                }
+                            ], 
+                            "description": [
+                                "Returns length|size, that is number of events"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "size ", 
+                        "unit": {}
+                    }
+                ], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "copyright": [
+                        "IVARTECH http://ivartech.com"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat <stamat@ivartech.com>"
+                    ], 
+                    "excerpt": "", 
+                    "namespace": [
+                        "ivar.patt\n/"
+                    ], 
+                    "uri": "dipdoc/ivartech/ivar/patt/Events.js", 
+                    "version": [
+                        "20130313\n"
+                    ], 
+                    "file": [
+                        "IVARTECH Events Class | Mediator pattern"
+                    ], 
+                    "id": ".ivar.patt.Events"
+                }
+            }
+        }, 
+        "details": {
+            "lang": "js", 
+            "root": "dipdoc/ivartech"
+        }
+    }
+}
