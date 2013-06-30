@@ -1,0 +1,3 @@
+
+def lol:
+	return 'lol'

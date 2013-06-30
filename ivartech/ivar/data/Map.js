@@ -1,10 +1,5 @@
 /**
  *	Map data structure class
- 
- 	 asdasdasd 			
- 		
- 		a
- loslors
  *	@author		Nikola Stamatovic Stamat <stamat@ivartech.com>
  *	@copyright	IVARTECH http://ivartech.com
  *	@version	20130313  
@@ -20,34 +15,8 @@ ivar.namespace('ivar.data');
  *	Map class similar to Java Map, providing methods for efficient usage of traditional key-value hash table storage
  *	@class 	asf		s
  *	@constructor
- *	@example
- 	var map = new ivar.data.Map();
-	var map1 = new ivar.data.Map({a:1, b:2});
-
-		alert(map.length); //0
-		alert(map1.length); //2
-
-	map.put( 'fo o	', 1);
-	alert	(map.length); //1
-	alert(map.keys()); //['foo'];
-	alert(map1.keys());//['a','b'];
-	map1.remove('a');
-	alert(map1.get('b')); //2
-	alert(map1.keys());//['b'];
-	map1.incorporate({c:3,d:4,e:5});
-	alert(map1.keys()); //['b','c','d','e'];
-	alert(map1.length); //4
-	alert(map1.getFirst()); // 2
-	alert(map1.getLast()); // 5
-	map1.put('b',15)
-	alert(map1.getById(0)); // 15
-	alert(map.equals(map1)); //false
-	map1.clear();
-	map1.put('foo',1);
-	alert(map.equals(map1)); //true	
  *	@property	{number}	length	Length of the map, like array length. Even though keys.length would do fine, this is kept for elegance
- *	@property	{object}	[object]	Object that 
- contains key-value pairs
+ *	@property	{object}	object	Object that contains key-value pairs
  *	@property	{array}		keys	Array containing key names used as keys in object to enable getFirst and getLast functionality
  */
 ivar.data.Map = function Map(o) {
@@ -144,7 +113,7 @@ ivar.data.Map = function Map(o) {
 	
 	this.hasNext = function() {
 		return pointer < keys.length;
-	}
+	};
 	
 	this.next = function() {
 		if(this.hasNext()) {
@@ -152,17 +121,17 @@ ivar.data.Map = function Map(o) {
 			pointer++;
 			return {key: key, value: this.get(key)};
 		}
-	}
+	};
 	
 	this.nextKey = function() {
 		if(this.hasNext()) {
 			return keys[pointer];
 		}
-	}
+	};
 	
 	this.hasPrevious = function() {
 		return pointer > 0;
-	}
+	};
 	
 	this.previous = function() {
 		if(this.hasPrevious()) {
@@ -170,13 +139,13 @@ ivar.data.Map = function Map(o) {
 			var key = keys[pointer];
 			return {key: key, value: this.get(key)};
 		}
-	}
+	};
 	
 	this.previousKey = function() {
 		if(this.hasPrevious()) {
 			return keys[pointer-1];
 		}
-	}
+	};
 	
 	/**
 	 *	Gets the value stored under given key

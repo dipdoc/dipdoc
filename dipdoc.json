@@ -1,33 +1,211 @@
 var dipdoc = {
     "js": {
         "data": {
-            ".ivartech.ivar.draw.filter": {
-                "content": [], 
-                "header": {
-                    "description": [
-                        "Canvas filter engine"
-                    ], 
-                    "author": [
-                        "Nikola Stamatovic Stamat"
-                    ], 
-                    "since": [
-                        ""
-                    ], 
-                    "excerpt": "Canvas filter engine", 
-                    "uri": "dipdoc/ivartech/ivar/draw/filter.js", 
-                    "file": [], 
-                    "todo": [
-                        {
-                            "urgent": false, 
-                            "task": ": test, organize, comment the fucking code! Exclude jquery! :D", 
-                            "complete": false
-                        }
-                    ], 
-                    "id": ".ivartech.ivar.draw.filter"
-                }
-            }, 
-            ".ivartech.ivar.data.Stack": {
-                "content": [], 
+            "ivartech.ivar.patt.Events": {
+                "content": [
+                    {
+                        "parent": "ivar.patt.", 
+                        "doc": {
+                            "description": [
+                                ""
+                            ], 
+                            "excerpt": "", 
+                            "constructor": [
+                                ""
+                            ], 
+                            "classdesc": [
+                                ""
+                            ], 
+                            "property": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "object"
+                                    ], 
+                                    "name": "list", 
+                                    "description": "Contains the event names paired with arrays of functions"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "array"
+                                    ], 
+                                    "name": "event_names", 
+                                    "description": "Contains all the event names\n"
+                                }
+                            ], 
+                            "class": []
+                        }, 
+                        "type": "function", 
+                        "name": "Events ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Binds a single function or an array of functions to an event name", 
+                            "description": [
+                                "Binds a single function or an array of functions to an event name\n\nvar me = new ivar.patt.Events();\nme.bind(['foo','bar','baz'], function(){\nprint('foo%bar%baz');\n});\n\nme.bind(['foo','baz'], function(){\nprint('foo%baz');\n});\n\nme.bind(['baz','bar'], function(){\nprint('baz%bar');\n});\n\nivar.print(me);\nme.fire('foo');\nme.unbind(['bar','baz']);\nme.fire('baz');\nme.fire('bar');"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "function", 
+                                        "array[function,...]"
+                                    ], 
+                                    "name": "func", 
+                                    "description": "(...)\n"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "bind ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Removes a certain function or array of functions from an event, thus disabling them to be fired", 
+                            "description": [
+                                "Removes a certain function or array of functions from an event, thus disabling them to be fired"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": ""
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "function", 
+                                        "array[function,...]"
+                                    ], 
+                                    "name": "func", 
+                                    "description": "(...)\n"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "unbind ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions.", 
+                            "description": [
+                                "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": "\n"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "fire ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Returns an array of all of the names of events that can be fired", 
+                            "description": [
+                                "Returns an array of all of the names of events that can be fired"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": "\n"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "getBound ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Removes an event by given event name with all bound functions", 
+                            "description": [
+                                "Removes an event by given event name with all bound functions"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": "\n"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "clearBound ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Removes all entries and restores the object to null state", 
+                            "description": [
+                                "Removes all entries and restores the object to null state"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "clear ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": "Returns length|size, that is number of events", 
+                            "return": [
+                                {
+                                    "type": [
+                                        "number"
+                                    ], 
+                                    "description": "\n"
+                                }
+                            ], 
+                            "description": [
+                                "Returns length|size, that is number of events"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "size ", 
+                        "unit": {}
+                    }
+                ], 
                 "header": {
                     "description": [
                         ""
@@ -40,34 +218,28 @@ var dipdoc = {
                     ], 
                     "excerpt": "", 
                     "namespace": [
-                        "ivar\n"
+                        "ivar.patt\n"
                     ], 
-                    "uri": "dipdoc/ivartech/ivar/data/Stack.js", 
+                    "uri": "./ivartech/ivar/patt/Events.js", 
+                    "id": "ivartech.ivar.patt.Events", 
                     "version": [
-                        "20130623\n"
+                        "20130313\n"
                     ], 
                     "file": [
-                        "Stack.js simple stack data structure"
+                        "IVARTECH Events Class | Mediator pattern"
                     ], 
-                    "id": ".ivartech.ivar.data.Stack"
+                    "sloc": 167, 
+                    "lines": 270
                 }
             }, 
-            ".ivartech.ivar.data.Map": {
+            "ivartech.ivar.data.Map": {
                 "content": [
                     {
                         "parent": "ivar.data.", 
                         "doc": {
-                            "description": [
-                                "Map class similar to Java Map, providing methods for efficient usage of traditional key-value hash table storage"
-                            ], 
-                            "excerpt": "Map class similar to Java Map, providing methods for efficient usage of traditional key-value hash table storage", 
-                            "class": [], 
-                            "constructor": [
-                                ""
-                            ], 
                             "property": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "number"
                                     ], 
@@ -80,10 +252,10 @@ var dipdoc = {
                                         "object"
                                     ], 
                                     "name": "object", 
-                                    "description": "Object that\ncontains key-value pairs"
+                                    "description": "Object that contains key-value pairs"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "array"
                                     ], 
@@ -91,9 +263,14 @@ var dipdoc = {
                                     "description": "Array containing key names used as keys in object to enable getFirst and getLast functionality\n"
                                 }
                             ], 
-                            "example": [
-                                "\n \tvar map = new ivar.data.Map();\n\n\tvar map1 = new ivar.data.Map({a:1, b:2});\n\n\n\n\t\talert(map.length); //0\n\n\t\talert(map1.length); //2\n\n\n\n\tmap.put( 'fo o\t', 1);\n\n\talert\t(map.length); //1\n\n\talert(map.keys()); //['foo'];\n\n\talert(map1.keys());//['a','b'];\n\n\tmap1.remove('a');\n\n\talert(map1.get('b')); //2\n\n\talert(map1.keys());//['b'];\n\n\tmap1.incorporate({c:3,d:4,e:5});\n\n\talert(map1.keys()); //['b','c','d','e'];\n\n\talert(map1.length); //4\n\n\talert(map1.getFirst()); // 2\n\n\talert(map1.getLast()); // 5\n\n\tmap1.put('b',15)\n\n\talert(map1.getById(0)); // 15\n\n\talert(map.equals(map1)); //false\n\n\tmap1.clear();\n\n\tmap1.put('foo',1);\n\n\talert(map.equals(map1)); //true\t\n"
-                            ]
+                            "constructor": [
+                                ""
+                            ], 
+                            "excerpt": "Map class similar to Java Map, providing methods for efficient usage of traditional key-value hash table storage", 
+                            "description": [
+                                "Map class similar to Java Map, providing methods for efficient usage of traditional key-value hash table storage"
+                            ], 
+                            "class": []
                         }, 
                         "type": "function", 
                         "name": "Map ", 
@@ -120,7 +297,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string", 
                                         "number"
@@ -129,7 +306,7 @@ var dipdoc = {
                                     "description": "A value that represents key for value retrieval"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -154,7 +331,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "Map"
                                     ], 
@@ -187,7 +364,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string", 
                                         "number"
@@ -210,7 +387,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "function"
                                     ], 
@@ -243,7 +420,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string", 
                                         "number"
@@ -277,7 +454,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "number"
                                     ], 
@@ -357,7 +534,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -436,7 +613,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string", 
                                         "number"
@@ -470,7 +647,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -549,7 +726,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "Map"
                                     ], 
@@ -589,7 +766,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "function"
                                     ], 
@@ -614,7 +791,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -630,7 +807,7 @@ var dipdoc = {
                 ], 
                 "header": {
                     "description": [
-                        "Map data structure class\n\nasdasdasd\n\na\nloslors"
+                        "Map data structure class"
                     ], 
                     "copyright": [
                         "IVARTECH http://ivartech.com"
@@ -642,285 +819,33 @@ var dipdoc = {
                     "namespace": [
                         "ivar.data\n"
                     ], 
-                    "uri": "dipdoc/ivartech/ivar/data/Map.js", 
+                    "uri": "./ivartech/ivar/data/Map.js", 
+                    "id": "ivartech.ivar.data.Map", 
                     "version": [
                         "20130313"
                     ], 
                     "file": [
                         "\n"
                     ], 
-                    "id": ".ivartech.ivar.data.Map"
+                    "sloc": 149, 
+                    "lines": 321
                 }
             }, 
-            ".ivartech.ivar.patt.Events": {
-                "content": [
-                    {
-                        "parent": "ivar.patt.", 
-                        "doc": {
-                            "description": [
-                                ""
-                            ], 
-                            "excerpt": "", 
-                            "constructor": [
-                                ""
-                            ], 
-                            "classdesc": [
-                                ""
-                            ], 
-                            "property": [
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "object"
-                                    ], 
-                                    "name": "list", 
-                                    "description": "Contains the event names paired with arrays of functions"
-                                }, 
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "array"
-                                    ], 
-                                    "name": "event_names", 
-                                    "description": "Contains all the event names\n"
-                                }
-                            ], 
-                            "class": []
-                        }, 
-                        "type": "function", 
-                        "name": "Events ", 
-                        "unit": {}
-                    }, 
-                    {
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "excerpt": "Binds a single function or an array of functions to an event name", 
-                            "description": [
-                                "Binds a single function or an array of functions to an event name\n\nvar me = new ivar.patt.Events();\nme.bind(['foo','bar','baz'], function(){\nprint('foo%bar%baz');\n});\n\nme.bind(['foo','baz'], function(){\nprint('foo%baz');\n});\n\nme.bind(['baz','bar'], function(){\nprint('baz%bar');\n});\n\nivar.print(me);\nme.fire('foo');\nme.unbind(['bar','baz']);\nme.fire('baz');\nme.fire('bar');"
-                            ], 
-                            "param": [
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "string", 
-                                        "number"
-                                    ], 
-                                    "name": "event_name", 
-                                    "description": ""
-                                }, 
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "function", 
-                                        "array[function,...]"
-                                    ], 
-                                    "name": "func", 
-                                    "description": "(...)\n"
-                                }
-                            ]
-                        }, 
-                        "type": "function", 
-                        "name": "bind ", 
-                        "unit": {}
-                    }, 
-                    {
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "excerpt": "Removes a certain function or array of functions from an event, thus disabling them to be fired", 
-                            "description": [
-                                "Removes a certain function or array of functions from an event, thus disabling them to be fired"
-                            ], 
-                            "param": [
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "string", 
-                                        "number"
-                                    ], 
-                                    "name": "event_name", 
-                                    "description": ""
-                                }, 
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "function", 
-                                        "array[function,...]"
-                                    ], 
-                                    "name": "func", 
-                                    "description": "(...)\n"
-                                }
-                            ]
-                        }, 
-                        "type": "function", 
-                        "name": "unbind ", 
-                        "unit": {}
-                    }, 
-                    {
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "excerpt": "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions.", 
-                            "description": [
-                                "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions."
-                            ], 
-                            "param": [
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "string", 
-                                        "number"
-                                    ], 
-                                    "name": "event_name", 
-                                    "description": "\n"
-                                }
-                            ]
-                        }, 
-                        "type": "function", 
-                        "name": "fire ", 
-                        "unit": {}
-                    }, 
-                    {
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "excerpt": "Returns an array of all of the names of events that can be fired", 
-                            "description": [
-                                "Returns an array of all of the names of events that can be fired"
-                            ], 
-                            "param": [
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "string", 
-                                        "number"
-                                    ], 
-                                    "name": "event_name", 
-                                    "description": "\n"
-                                }
-                            ]
-                        }, 
-                        "type": "function", 
-                        "name": "getBound ", 
-                        "unit": {}
-                    }, 
-                    {
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "excerpt": "Removes an event by given event name with all bound functions", 
-                            "description": [
-                                "Removes an event by given event name with all bound functions"
-                            ], 
-                            "param": [
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "string", 
-                                        "number"
-                                    ], 
-                                    "name": "event_name", 
-                                    "description": "\n"
-                                }
-                            ]
-                        }, 
-                        "type": "function", 
-                        "name": "clearBound ", 
-                        "unit": {}
-                    }, 
-                    {
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "excerpt": "Removes all entries and restores the object to null state", 
-                            "description": [
-                                "Removes all entries and restores the object to null state"
-                            ]
-                        }, 
-                        "type": "function", 
-                        "name": "clear ", 
-                        "unit": {}
-                    }, 
-                    {
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "excerpt": "Returns length|size, that is number of events", 
-                            "return": [
-                                {
-                                    "type": [
-                                        "number"
-                                    ], 
-                                    "description": "\n"
-                                }
-                            ], 
-                            "description": [
-                                "Returns length|size, that is number of events"
-                            ]
-                        }, 
-                        "type": "function", 
-                        "name": "size ", 
-                        "unit": {}
-                    }
-                ], 
-                "header": {
-                    "description": [
-                        ""
-                    ], 
-                    "copyright": [
-                        "IVARTECH http://ivartech.com"
-                    ], 
-                    "author": [
-                        "Nikola Stamatovic Stamat <stamat@ivartech.com>"
-                    ], 
-                    "excerpt": "", 
-                    "namespace": [
-                        "ivar.patt\n"
-                    ], 
-                    "uri": "dipdoc/ivartech/ivar/patt/Events.js", 
-                    "version": [
-                        "20130313\n"
-                    ], 
-                    "file": [
-                        "IVARTECH Events Class | Mediator pattern"
-                    ], 
-                    "id": ".ivartech.ivar.patt.Events"
-                }
-            }, 
-            ".ivartech.ivar.html": {
+            "ivartech.ivar.data.JXON": {
                 "content": [], 
                 "header": {
                     "description": [
-                        ""
+                        "\\\n|*|\n|*|  JXON framework - Copyleft 2011 by Mozilla Developer Network\n|*|\n|*|  https://developer.mozilla.org/en-US/docs/JXON\n|*|\n|*|\n|*|\t\tJXON.toJSON(xml);\n|*|\t\tJXON.toXML(json);\n\\"
                     ], 
-                    "excerpt": "", 
-                    "uri": "dipdoc/ivartech/ivar/html.js", 
-                    "param": [
-                        "spec {String} name,id,tag\n"
-                    ], 
+                    "excerpt": "\\", 
+                    "lines": 16, 
+                    "uri": "./ivartech/ivar/data/JXON.js", 
                     "file": [], 
-                    "id": ".ivartech.ivar.html"
+                    "sloc": 5, 
+                    "id": "ivartech.ivar.data.JXON"
                 }
             }, 
-            ".ivartech.ivar.data.jules": {
-                "content": [], 
-                "header": {
-                    "file": [], 
-                    "description": [
-                        "jules.js\nJULES - (another) JavaScript Schema Validator\nEzekiel 25:17"
-                    ], 
-                    "copyright": [
-                        "IVARTECH < http://ivartech.com >"
-                    ], 
-                    "author": [
-                        "Nikola Stamatovic Stamat < stamat@ivartech.com >"
-                    ], 
-                    "since": [
-                        ""
-                    ], 
-                    "excerpt": "jules.js", 
-                    "uri": "dipdoc/ivartech/ivar/data/jules.js", 
-                    "licence": [
-                        "MIT"
-                    ], 
-                    "id": ".ivartech.ivar.data.jules"
-                }
-            }, 
-            ".ivartech.main": {
+            "ivartech.main": {
                 "content": [
                     {
                         "parent": "ivar.", 
@@ -939,7 +864,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -969,7 +894,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "array", 
                                         "object", 
@@ -993,7 +918,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -1015,7 +940,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -1037,7 +962,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -1059,7 +984,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1067,7 +992,7 @@ var dipdoc = {
                                     "description": "Function name of console object: log, warn, error..."
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "any"
                                     ], 
@@ -1098,7 +1023,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1106,7 +1031,7 @@ var dipdoc = {
                                     "description": "Any object with properties"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1159,7 +1084,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1167,7 +1092,7 @@ var dipdoc = {
                                     "description": "First object to be extended"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1175,7 +1100,7 @@ var dipdoc = {
                                     "description": "Second object extending the first one"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "number[0", 
                                         "1]", 
@@ -1199,7 +1124,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "number"
                                     ], 
@@ -1207,7 +1132,7 @@ var dipdoc = {
                                     "description": "Number of times to spin the function"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "function"
                                     ], 
@@ -1215,7 +1140,7 @@ var dipdoc = {
                                     "description": "Function to be spun for the given number of times"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "number"
                                     ], 
@@ -1251,7 +1176,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1272,7 +1197,7 @@ var dipdoc = {
                                 "===============================================================================\nCrc32 is a JavaScript function for computing the CRC32 of a string\n...............................................................................\n\nVersion: 1.2 - 2006/11 - http://noteslog.com/category/javascript/\n\n-------------------------------------------------------------------------------\nCopyright (c) 2006 Andrea Ercolino\nhttp://www.opensource.org/licenses/mit-license.php\n==============================================================================="
                             ]
                         }, 
-                        "type": "data", 
+                        "type": "field", 
                         "name": "crc32_table ", 
                         "unit": {}
                     }, 
@@ -1303,17 +1228,19 @@ var dipdoc = {
                     "namespace": [
                         "ivar\n"
                     ], 
-                    "uri": "dipdoc/ivartech/main.js", 
+                    "uri": "./ivartech/main.js", 
+                    "id": "ivartech.main", 
                     "version": [
                         "20130313\n"
                     ], 
                     "file": [
                         "IVARTECH JavaScript Library - main class"
                     ], 
-                    "id": ".ivartech.main"
+                    "sloc": 905, 
+                    "lines": 1211
                 }
             }, 
-            ".ivartech.ivar.search": {
+            "ivartech.ivar.search": {
                 "content": [
                     {
                         "parent": "ivar.search.", 
@@ -1322,10 +1249,11 @@ var dipdoc = {
                                 ""
                             ], 
                             "excerpt": "", 
-                            "uri": "dipdoc/ivartech/ivar/search.js", 
+                            "lines": 81, 
+                            "uri": "./ivartech/ivar/search.js", 
                             "param": [
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "boolean"
                                     ], 
@@ -1333,7 +1261,7 @@ var dipdoc = {
                                     "description": ""
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "number", 
                                         "string"
@@ -1343,6 +1271,7 @@ var dipdoc = {
                                 }
                             ], 
                             "file": [], 
+                            "sloc": 69, 
                             "todo": [
                                 {
                                     "urgent": false, 
@@ -1350,7 +1279,7 @@ var dipdoc = {
                                     "complete": false
                                 }
                             ], 
-                            "id": ".ivartech.ivar.search"
+                            "id": "ivartech.ivar.search"
                         }, 
                         "type": "function", 
                         "name": "quickSearch ", 
@@ -1362,10 +1291,11 @@ var dipdoc = {
                         ""
                     ], 
                     "excerpt": "", 
-                    "uri": "dipdoc/ivartech/ivar/search.js", 
+                    "lines": 81, 
+                    "uri": "./ivartech/ivar/search.js", 
                     "param": [
                         {
-                            "mandatory": true, 
+                            "mandatory": false, 
                             "type": [
                                 "boolean"
                             ], 
@@ -1373,7 +1303,7 @@ var dipdoc = {
                             "description": ""
                         }, 
                         {
-                            "mandatory": true, 
+                            "mandatory": false, 
                             "type": [
                                 "number", 
                                 "string"
@@ -1383,6 +1313,7 @@ var dipdoc = {
                         }
                     ], 
                     "file": [], 
+                    "sloc": 69, 
                     "todo": [
                         {
                             "urgent": false, 
@@ -1390,10 +1321,10 @@ var dipdoc = {
                             "complete": false
                         }
                     ], 
-                    "id": ".ivartech.ivar.search"
+                    "id": "ivartech.ivar.search"
                 }
             }, 
-            ".ivartech.ivar.net.Communication": {
+            "ivartech.ivar.net.Communication": {
                 "content": [
                     {
                         "parent": "ivar.net.", 
@@ -1404,7 +1335,7 @@ var dipdoc = {
                             "excerpt": "", 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1412,7 +1343,7 @@ var dipdoc = {
                                     "description": ""
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1420,7 +1351,7 @@ var dipdoc = {
                                     "description": "URL of server side interface"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "boolean"
                                     ], 
@@ -1428,7 +1359,7 @@ var dipdoc = {
                                     "description": "Should a request be asynchronous or not"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1436,7 +1367,7 @@ var dipdoc = {
                                     "description": "HTTP method GET, POST, PUT, DELETE"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1444,7 +1375,7 @@ var dipdoc = {
                                     "description": "Content MIME type json|rest|xml| image|file..."
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1452,7 +1383,7 @@ var dipdoc = {
                                     "description": "User name for HTTP auth"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1460,7 +1391,7 @@ var dipdoc = {
                                     "description": "User password for HTTP auth"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "boolean"
                                     ], 
@@ -1476,7 +1407,7 @@ var dipdoc = {
                             ], 
                             "property": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "Map"
                                     ], 
@@ -1484,7 +1415,7 @@ var dipdoc = {
                                     "description": "Map of all registered request objects where key is the name of the method invoked on server"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "Map"
                                     ], 
@@ -1492,7 +1423,7 @@ var dipdoc = {
                                     "description": ""
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "Map"
                                     ], 
@@ -1500,7 +1431,7 @@ var dipdoc = {
                                     "description": ""
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "Map"
                                     ], 
@@ -1508,7 +1439,7 @@ var dipdoc = {
                                     "description": ""
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1516,7 +1447,7 @@ var dipdoc = {
                                     "description": ""
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "boolean"
                                     ], 
@@ -1524,7 +1455,7 @@ var dipdoc = {
                                     "description": "true"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1532,7 +1463,7 @@ var dipdoc = {
                                     "description": "'GET'"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1540,7 +1471,7 @@ var dipdoc = {
                                     "description": "'application/json'"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "boolean"
                                     ], 
@@ -1570,7 +1501,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1592,7 +1523,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string", 
                                         "object"
@@ -1601,7 +1532,7 @@ var dipdoc = {
                                     "description": ""
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1609,7 +1540,7 @@ var dipdoc = {
                                     "description": "JSON-RPC formed request: method name and params"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string", 
                                         "number"
@@ -1618,7 +1549,7 @@ var dipdoc = {
                                     "description": "Request UID string if not supplied it is automatically generated"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1626,7 +1557,7 @@ var dipdoc = {
                                     "description": "Name of the method to be invoked on server"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1634,7 +1565,7 @@ var dipdoc = {
                                     "description": "Request data to be submitted to method on server as its parameters"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1642,7 +1573,7 @@ var dipdoc = {
                                     "description": "URI of server side interface"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "boolean"
                                     ], 
@@ -1650,7 +1581,7 @@ var dipdoc = {
                                     "description": "Should a request be asynchronous or not"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1658,7 +1589,7 @@ var dipdoc = {
                                     "description": "HTTP method GET, POST, PUT, DELETE"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1666,7 +1597,7 @@ var dipdoc = {
                                     "description": "Content MIME type json|rest|xml| image|file..."
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1674,7 +1605,7 @@ var dipdoc = {
                                     "description": "User name for HTTP auth"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1696,7 +1627,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1726,7 +1657,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1734,7 +1665,7 @@ var dipdoc = {
                                     "description": "Option object containing request data"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1742,7 +1673,7 @@ var dipdoc = {
                                     "description": "JSON-RPC formed request: method name and params"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string", 
                                         "number"
@@ -1751,7 +1682,7 @@ var dipdoc = {
                                     "description": "Request UID string if not supplied it is automatically generated"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1759,7 +1690,7 @@ var dipdoc = {
                                     "description": "Name of the method to be invoked on server"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1767,7 +1698,7 @@ var dipdoc = {
                                     "description": "Request data to be submitted to method on server as its parameters"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1775,7 +1706,7 @@ var dipdoc = {
                                     "description": "URI of server side interface"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "boolean"
                                     ], 
@@ -1783,7 +1714,7 @@ var dipdoc = {
                                     "description": "Should a request be asynchronous or not"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1791,7 +1722,7 @@ var dipdoc = {
                                     "description": "HTTP method GET, POST, PUT, DELETE"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1799,7 +1730,7 @@ var dipdoc = {
                                     "description": "Content MIME type json|rest|xml| image|file..."
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1807,7 +1738,7 @@ var dipdoc = {
                                     "description": "User name for HTTP auth"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1836,7 +1767,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1844,7 +1775,7 @@ var dipdoc = {
                                     "description": ""
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "number"
                                     ], 
@@ -1852,7 +1783,7 @@ var dipdoc = {
                                     "description": "XMLHttpRequest.status"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1860,7 +1791,7 @@ var dipdoc = {
                                     "description": "XMLHttpRequest.getResponseHeader('Date')"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1868,7 +1799,7 @@ var dipdoc = {
                                     "description": "XMLHttpRequest.responseText"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1876,7 +1807,7 @@ var dipdoc = {
                                     "description": "XMLHttpRequest.getResponseHeader('Content-Type')"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string", 
                                         "number"
@@ -1899,7 +1830,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "object"
                                     ], 
@@ -1907,7 +1838,7 @@ var dipdoc = {
                                     "description": "Request object described in the send method options {@see ivar.util.Communication.send}"
                                 }, 
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string"
                                     ], 
@@ -1915,7 +1846,7 @@ var dipdoc = {
                                     "description": "Error message"
                                 }, 
                                 {
-                                    "mandatory": true, 
+                                    "mandatory": false, 
                                     "type": [
                                         "boolean"
                                     ], 
@@ -1945,7 +1876,7 @@ var dipdoc = {
                             ], 
                             "param": [
                                 {
-                                    "mandatory": false, 
+                                    "mandatory": true, 
                                     "type": [
                                         "string", 
                                         "number"
@@ -1974,32 +1905,120 @@ var dipdoc = {
                     "namespace": [
                         "ivar.net\n"
                     ], 
-                    "uri": "dipdoc/ivartech/ivar/net/Communication.js", 
+                    "uri": "./ivartech/ivar/net/Communication.js", 
+                    "id": "ivartech.ivar.net.Communication", 
                     "version": [
                         "20130313\n"
                     ], 
                     "file": [
                         "IVARTECH Communication class, for client to server AJAX comunication"
                     ], 
-                    "id": ".ivartech.ivar.net.Communication"
+                    "sloc": 299, 
+                    "lines": 479
                 }
             }, 
-            ".ivartech.ivar.data.JXON": {
+            "ivartech.ivar.data.jules": {
                 "content": [], 
                 "header": {
-                    "id": ".ivartech.ivar.data.JXON", 
-                    "excerpt": "\\", 
+                    "file": [], 
                     "description": [
-                        "\\\n|*|\n|*|  JXON framework - Copyleft 2011 by Mozilla Developer Network\n|*|\n|*|  https://developer.mozilla.org/en-US/docs/JXON\n|*|\n|*|\n|*|\t\tJXON.toJSON(xml);\n|*|\t\tJXON.toXML(json);\n\\"
+                        "jules.js\nJULES - (another) JavaScript Schema Validator\nEzekiel 25:17"
+                    ], 
+                    "copyright": [
+                        "IVARTECH < http://ivartech.com >"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat < stamat@ivartech.com >"
+                    ], 
+                    "lines": 711, 
+                    "since": [
+                        ""
+                    ], 
+                    "excerpt": "jules.js", 
+                    "uri": "./ivartech/ivar/data/jules.js", 
+                    "licence": [
+                        "MIT"
+                    ], 
+                    "sloc": 570, 
+                    "id": "ivartech.ivar.data.jules"
+                }
+            }, 
+            "ivartech.ivar.draw.filter": {
+                "content": [], 
+                "header": {
+                    "description": [
+                        "Canvas filter engine"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat"
+                    ], 
+                    "lines": 164, 
+                    "since": [
+                        ""
+                    ], 
+                    "excerpt": "Canvas filter engine", 
+                    "uri": "./ivartech/ivar/draw/filter.js", 
+                    "file": [], 
+                    "sloc": 116, 
+                    "todo": [
+                        {
+                            "urgent": false, 
+                            "task": ": test, organize, comment the fucking code! Exclude jquery! :D", 
+                            "complete": false
+                        }
+                    ], 
+                    "id": "ivartech.ivar.draw.filter"
+                }
+            }, 
+            "ivartech.ivar.html": {
+                "content": [], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "excerpt": "", 
+                    "lines": 80, 
+                    "uri": "./ivartech/ivar/html.js", 
+                    "param": [
+                        "spec {String} name,id,tag\n"
                     ], 
                     "file": [], 
-                    "uri": "dipdoc/ivartech/ivar/data/JXON.js"
+                    "sloc": 63, 
+                    "id": "ivartech.ivar.html"
+                }
+            }, 
+            "ivartech.ivar.data.Stack": {
+                "content": [], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "copyright": [
+                        "IVARTECH http://ivartech.com"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat <stamat@ivartech.com>"
+                    ], 
+                    "excerpt": "", 
+                    "namespace": [
+                        "ivar\n"
+                    ], 
+                    "uri": "./ivartech/ivar/data/Stack.js", 
+                    "id": "ivartech.ivar.data.Stack", 
+                    "version": [
+                        "20130623\n"
+                    ], 
+                    "file": [
+                        "Stack.js simple stack data structure"
+                    ], 
+                    "sloc": 37, 
+                    "lines": 54
                 }
             }
         }, 
         "details": {
             "lang": "js", 
-            "root": "dipdoc"
+            "root": "./"
         }
     }
 }

@@ -49,10 +49,10 @@ def parseParam(s):
 	if prop is not None:
 		res['type'] = prop.group('type').split('|')
 		res['name'] = prop.group('name').strip()
-		res['mandatory'] = False
+		res['mandatory'] = True
 		mand = re.match(r'^\[(.*)\]$', res['name'])
 		if mand is not None:
-			res['mandatory'] = True
+			res['mandatory'] = False
 			res['name'] = mand.group(1)
 		res['description'] = prop.group('description')
 		return res
@@ -132,7 +132,7 @@ def jsExtract(s):
 		return
 		
 	isFn = re.match(r'.*function(\s|\t)*.*(\s|\t)*\(', s)
-	isImport = re.match(r'.*(import|include|require)(\s|\t)*\((?P<id>.*)\)', s)
+	isImport = re.match(r'^(import|include|require)(\s|\t)*\((?P<id>.*)\)', s)
 	if isFn is not None:
 		res['type'] = 'function'
 		#args = re.match(r'.*function(\s|\t)*.*(\s|\t)*\((\s|\t)*(?P<args>([a-zA-Z_$][a-zA-Z0-9_$]*(\s|\t)*,(\s|\t)*)*([a-zA-Z_$][a-zA-Z0-9_$]*)?)(\s|\t)*\)(\s|\t)*\{?', s)
@@ -154,7 +154,7 @@ def jsExtract(s):
 		res['name'] = isImport.group('id')
 		return res
 	else:
-		res['type'] = 'data'
+		res['type'] = 'field'
 		
 	this = re.match(r'^this\.(?P<name>..*)(\s|\t)*=', s)
 	if this is not None:
@@ -181,8 +181,9 @@ def buildTagParsingRegexp(l):
 	for i in l:
 		res.append('((?P<'+i['name']+'>'+i['pref']+'[\w]+)(?P<'+i['name']+'_rest>.*))');
 	return '|'.join(res)
-	
-def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor= '\*'):
+
+#I know there is too many lines of code but it is fast if this is done in one iteration
+def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor= '\*', sing='//'):
 	eset = {'header':{}, 'content':[]}
 	reg_str = buildTagParsingRegexp(tags)
 	tag_re = re.compile(reg_str)
@@ -192,11 +193,13 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 	one_more = False
 	first = None
 	e = {}
+	lines = 0
+	sloc = 0
 
 	f = open(uri, 'r')
 	for line in f:
-
-		#line = line.strip()
+		lines += 1
+		
 		stripped = line.strip()
 
 		start = re.match('^'+pref+'(.*)', stripped)
@@ -208,12 +211,20 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 
 			tag_name = None
 			tp = None
+		
+		#each code line
+		single = re.match('^'+sing, stripped)
+		if single is None:
+			if flag and one_more:
+				sloc += 1
+			elif not flag and stripped != '':
+				sloc += 1
 
 		end = re.match('(.*)'+suf+'$', stripped)
 		if end is not None:
 			stripped = end.group(1)
 			
-		#each comment line
+		#each multiline comment line
 		if flag and not one_more:
 
 			st = strip_re.match(stripped)
@@ -260,7 +271,7 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 					else:
 						e[tp][tag_name].append(stripped)
 
-		#On last line, that usualy contains the function, class or data related to the documentation
+		#On last line, that usualy contains the function, class or field related to the documentation
 		if one_more:
 
 			if 'doc' in e and 'description' in e['doc']:
@@ -300,7 +311,10 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 		if 'file' not in first and 'name' not in first:
 			first['file'] = []
 		eset['header'] = first
-
+	
+	if 'file' in eset['header']:
+		eset['header']['lines'] = lines
+		eset['header']['sloc'] = sloc-1
 	return eset
 
 def parseCommentLine(line, tags, tag_re):
@@ -329,6 +343,8 @@ def doFile(root, uri, collector, extension='js'):
 	ext = '.'+extension
 	print root,uri
 	if uri.endswith(ext):
+		if not root.endswith(os.sep):
+			root += os.sep
 		iden = '.'.join(uri[len(root):-len(ext)].split(os.sep))
 		result = getCommentData(uri, tags, decl, extension)
 		if not result['content'] and not result['header']:
@@ -385,7 +401,7 @@ def main(argv):
 	ln = len(argv)
 	if ln == 2:
 		run(argv[0], argv[1].split(','))
-	elif ln == 3:
+	elif ln > 2:
 		run(argv[0], argv[1].split(','), argv[2].split(','))
 	else:
 		run(argv[0])
