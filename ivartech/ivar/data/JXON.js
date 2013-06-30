@@ -1,13 +1,12 @@
-/*\
-|*|
-|*|  JXON framework - Copyleft 2011 by Mozilla Developer Network
-|*|
-|*|  https://developer.mozilla.org/en-US/docs/JXON
-|*|
-|*|
-|*|		JXON.toJSON(xml);
-|*|		JXON.toXML(json);
-\*/
+/**
+ * JXON framework - JSON to XML and XML to JSON
+ *
+ * @author Copyleft 2011 by Mozilla Developer Network
+ * @link https://developer.mozilla.org/en-US/docs/JXON
+ * @example
+ * JXON.toJSON(xml);
+ * JXON.toXML(json);
+ */
  
 var JXON=new function(){function u(a){return z.test(a)?null:A.test(a)?"true"===a.toLowerCase():isFinite(a)?parseFloat(a):isFinite(Date.parse(a))?new Date(a):a}function s(){}function v(a,d,f,b){var g=q.length,c=a.hasChildNodes(),j=a.hasAttributes(),k=Boolean(d&2),r,m=0,n="",h=k?{}:!0;if(c)for(var e,p=0;p<a.childNodes.length;p++)e=a.childNodes.item(p),4===e.nodeType?n+=e.nodeValue:3===e.nodeType?n+=e.nodeValue.trim():1===e.nodeType&&!e.prefix&&q.push(e);p=q.length;e=u(n);if(!k&&(c||j))h=0===d?null===
 e?new s:e instanceof Object?e:new e.constructor(e):{};for(var l=g;l<p;l++)c=q[l].nodeName.toLowerCase(),r=v(q[l],d,f,b),h.hasOwnProperty(c)?(h[c].constructor!==Array&&(h[c]=[h[c]]),h[c].push(r)):(h[c]=r,m++);if(j){j=a.attributes.length;p=b?"":w;c=b?{}:h;for(l=0;l<j;m++,l++)r=a.attributes.item(l),c[p+r.name.toLowerCase()]=u(r.value.trim());b&&(f&&Object.freeze(c),h[x]=c,m-=j-1)}3===d||(2===d||1===d&&0<m)&&n?h[y]=e:!k&&(0===m&&n)&&(h=e);f&&(k||0<m)&&Object.freeze(h);q.length=g;return h}function t(a,

@@ -13,10 +13,31 @@ import sys
 import os
 import re
 import json
+import imp
+import threading
+import Queue
 
-import markdown
+import lib.markdown2
 
+def importFromURI(uri, absl=False):
+	mod = None
+	if not absl:
+		uri = os.path.normpath(os.path.join(os.path.dirname(__file__), uri))
+	path, fname = os.path.split(uri)
+	mname, ext = os.path.splitext(fname)
 
+	if os.path.exists(os.path.join(path,mname)+'.pyc'):
+		try:
+			return imp.load_compiled(mname, uri)
+		except:
+			pass
+	if os.path.exists(os.path.join(path,mname)+'.py'):
+		try:
+			return imp.load_source(mname, uri)
+		except:
+			pass
+
+	return mod
 
 tags = [{'pref':'@','name':'doc'},
   	{'pref':'\$','name':'unit'}]
@@ -117,64 +138,14 @@ decl['doc']['todo'] = parseToDo
 decl['unit']['prepare'] = asIs
 decl['unit']['assert'] = asIs #TODO: parse assert
 
+#Access modifiers
+decl['doc']['private'] = asIs
+decl['doc']['public'] = asIs
+decl['doc']['static'] = asIs
+decl['doc']['protected'] = asIs
+decl['doc']['class'] = asIs
+
 lang = {}
-lang['js'] = {}
-
-def jsExtract(s):
-	s = s.strip()
-	res = {}
-	#TODO: dont frgt class for other languages 
-	if not s:
-		return
-	
-	isComment = re.match(r'^(/\*|//)', s) is not None
-	if isComment:
-		return
-		
-	isFn = re.match(r'.*function(\s|\t)*.*(\s|\t)*\(', s)
-	isImport = re.match(r'^(import|include|require)(\s|\t)*\((?P<id>.*)\)', s)
-	if isFn is not None:
-		res['type'] = 'function'
-		#args = re.match(r'.*function(\s|\t)*.*(\s|\t)*\((\s|\t)*(?P<args>([a-zA-Z_$][a-zA-Z0-9_$]*(\s|\t)*,(\s|\t)*)*([a-zA-Z_$][a-zA-Z0-9_$]*)?)(\s|\t)*\)(\s|\t)*\{?', s)
-		#if args is not None:
-		#	res['args'] = args.group('args').split(',')
-		proto = re.match(r'^(?P<parent>..*)\.prototype\.(?P<name>..*)(\s|\t)*=', s)
-		if proto is not None:
-			res['name'] = proto.group('name')
-			res['parent'] = proto.group('parent')
-			return res
-			
-		fn = re.match(r'^function(\s|\t)*(?P<name>..*)(\s|\t)*\(', s)
-		if fn is not None:
-			res['name'] = fn.group('name')
-			return res
-	
-	elif isImport is not None:
-		res['type'] = 'dependency'
-		res['name'] = isImport.group('id')
-		return res
-	else:
-		res['type'] = 'field'
-		
-	this = re.match(r'^this\.(?P<name>..*)(\s|\t)*=', s)
-	if this is not None:
-		res['name'] = this.group('name')
-		res['parent'] = 'this'
-		return res
-		
-	var = re.match(r'^var(\s|\t)*(?P<name>..*)(\s|\t)*=', s)
-	if var is not None:
-		res['name'] = var.group('name')
-		return res
-		
-	other = re.match(r'^(?P<parent>(..*\.)*)(?P<name>..*)(\s|\t)*=', s)
-	if other is not None:
-		res['name'] = other.group('name')
-		if other.group('parent') is not None:
-			res['parent'] = other.group('parent')
-		return res
-
-lang['js'] = jsExtract
 
 def buildTagParsingRegexp(l):
 	res = []
@@ -341,8 +312,8 @@ def parseCommentLine(line, tags, tag_re):
 
 def doFile(root, uri, collector, extension='js'):
 	ext = '.'+extension
-	print root,uri
 	if uri.endswith(ext):
+		print uri
 		if not root.endswith(os.sep):
 			root += os.sep
 		iden = '.'.join(uri[len(root):-len(ext)].split(os.sep))
@@ -353,12 +324,14 @@ def doFile(root, uri, collector, extension='js'):
 		result['header']['id'] = iden
 		collector[iden] = result
 
+#XXX: this is only temporary
 def outputResult(uri, collector):
 	f = open(uri, 'w')
 	f.write('var dipdoc = '+json.dumps(collector,indent=4))
 	f.close()
-	
-def run(url, lang=['js'], skip=[], exclude_hidden=True):
+
+#Run the mother fucker	
+def run(url, langs=['js'], skip=[], exclude_hidden=True):
 	
 	modskip = []
 	for i in skip:
@@ -367,14 +340,40 @@ def run(url, lang=['js'], skip=[], exclude_hidden=True):
 	
 	res = {}
 	
-	for ex in lang:
-		data = {}
+	data = {}
+	
+	class ThreadFile(threading.Thread):
+		def __init__(self, queue):
+			threading.Thread.__init__(self)
+			self.queue = queue
+
+		def run(self):
+			while True:
+				tup = self.queue.get()
+				doFile(*tup)
+				self.queue.task_done()
+    
+	for ex in langs:
+		mod = importFromURI('lang/'+ex+'.py')
+		if mod is not None:
+			lang[ex] = {}
+			lang[ex] = mod.fn
+		else:
+			continue
+		
+		queue = Queue.Queue()
+		
+		for i in range(10):
+			t = ThreadFile(queue)
+			t.setDaemon(True)
+			t.start()
+			
 		for root, dirs, files in os.walk(url):
 			if exclude_hidden:
 				for d in dirs:
 					if d.startswith('.'):
 						dirs.remove(d)
-		
+	
 			if root in skip:
 				for d in dirs:
 					dirs.remove(d)
@@ -384,9 +383,11 @@ def run(url, lang=['js'], skip=[], exclude_hidden=True):
 				fpath = os.path.join(root, f)
 				if fpath in skip:
 					continue
-				for ex in lang:
-					doFile(url, fpath, data, ex)
-	
+			
+				queue.put((url, fpath, data, ex))
+					
+		queue.join()
+		
 		container = {}
 		container['data'] = data
 		container['details'] = {}

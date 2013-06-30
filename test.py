@@ -1,3 +1,0 @@
-
-def lol:
-	return 'lol'

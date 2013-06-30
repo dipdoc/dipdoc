@@ -1,0 +1,7 @@
+{
+	"css":["css/bootstrap.css","css/bootstrap-responsive.css"],
+	"default_reader":"js/dipdoc.js",
+	"html":"template.html",
+	"js":["js/jquery.min.js"],
+	"lang":"js/lang"
+}
