@@ -5,7 +5,8 @@ a.sort();
 console.log(a);
 
 $(document).ready(function() {
+	dipdoc['js']['data'] = ivar.sortProperties(dipdoc['js']['data'])
 	for(var i in dipdoc['js']['data']) {
-		$('body').append(i+' - '+dipdoc['js']['data'][i].header.excerpt+'<br />');
+		$('table tbody').append('<tr><td><a href="#module='+i+'">'+i+'</a></td><td>'+dipdoc['js']['data'][i].header.excerpt[0]+'</td></tr>');
 	}
 });

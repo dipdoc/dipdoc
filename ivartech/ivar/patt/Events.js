@@ -1,18 +1,17 @@
 /**
- *	@file		IVARTECH Events Class | Mediator pattern
+ *	Events Class | Mediator pattern
  *	@author		Nikola Stamatovic Stamat <stamat@ivartech.com>
  *	@copyright	IVARTECH http://ivartech.com
  *	@version	20130313  
- *	
+ *	@file
  *	@namespace	ivar.patt
  */
 
 ivar.namespace('ivar.patt');
 
 /**
- *	@class
- *	@classdesc	Events class enables you to stack functions under a single name to be executed when that name is called from anywhere in the program. Functions can be passed arguments when firing an event.
- *
+ *	Events class enables you to stack functions under a single name to be executed when that name is called from anywhere in the program. Functions can be passed arguments when firing an event.
+ *  @class
  *	@constructor
  *	@property	{object}	list		Contains the event names paired with arrays of functions
  *	@property	{array}		event_names	Contains all the event names
@@ -36,7 +35,7 @@ ivar.patt.Events.prototype.constructor = ivar.patt.Events;
 
 /**
  *	Binds a single function or an array of functions to an event name
- 
+ @example
  	var me = new ivar.patt.Events();
 	me.bind(['foo','bar','baz'], function(){
 		print('foo%bar%baz');
@@ -57,7 +56,7 @@ ivar.patt.Events.prototype.constructor = ivar.patt.Events;
 	me.fire('bar');
 	
  *	
- *	@param	{string|number}						event_name
+	@param	{string|number}						event_name
  *	@param 	{function|array[function,...]}		func(...)
  */
 ivar.patt.Events.prototype.bind = function(event_name, func) {

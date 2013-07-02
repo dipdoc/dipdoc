@@ -20,7 +20,7 @@ ivar.getProperyByNamespace = function(str, root, del) {
 		if (current.hasOwnProperty(parts[i])) {
 			current = current[parts[i]];
 		} else {
-			return undefined;
+			return;
 		}
 	}
 	return current;

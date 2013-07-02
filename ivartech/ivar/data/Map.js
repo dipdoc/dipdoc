@@ -13,7 +13,7 @@ ivar.namespace('ivar.data');
 
 /**
  *	Map class similar to Java Map, providing methods for efficient usage of traditional key-value hash table storage
- *	@class 	asf		s
+ *	@class
  *	@constructor
  *	@property	{number}	length	Length of the map, like array length. Even though keys.length would do fine, this is kept for elegance
  *	@property	{object}	object	Object that contains key-value pairs

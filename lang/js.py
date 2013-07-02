@@ -3,6 +3,7 @@ import re
 def jsExtract(s):
 	s = s.strip()
 	res = {}
+	res['doc'] = {}
 	#TODO: dont frgt class for other languages 
 	if not s:
 		return
@@ -22,6 +23,8 @@ def jsExtract(s):
 		if proto is not None:
 			res['name'] = proto.group('name')
 			res['parent'] = proto.group('parent')
+			res['namespace'] = '.'.join(proto.group('parent').split('.')[:-1])
+			res['doc']['this'] = proto.group('parent')
 			return res
 			
 		fn = re.match(r'^function(\s|\t)*(?P<name>..*)(\s|\t)*\(', s)
@@ -55,3 +58,9 @@ def jsExtract(s):
 		return res
 
 fn = jsExtract
+
+comments = {}
+comments['pref'] = '/\*'
+comments['suf'] = '\*/'
+comments['decor'] = '\*'
+comments['single'] = '//'

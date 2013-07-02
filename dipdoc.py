@@ -39,9 +39,16 @@ def importFromURI(uri, absl=False):
 
 	return mod
 
+def update(d1, d2):
+	for k,v in d2.items():
+		if k in d1 and type(d1[k]) is dict and type(v) is dict:
+			update(d1[k], v)
+		else:
+			d1[k] = v
+	return d1
+
 tags = [{'pref':'@','name':'doc'},
   	{'pref':'\$','name':'unit'}]
-data = {}
 
 decl = {}
 for tag in tags:
@@ -143,9 +150,11 @@ decl['doc']['private'] = asIs
 decl['doc']['public'] = asIs
 decl['doc']['static'] = asIs
 decl['doc']['protected'] = asIs
-decl['doc']['class'] = asIs
+decl['doc']['class'] = stripWhitespace
+decl['doc']['excerpt'] = stripWhitespace
 
 lang = {}
+comments = {}
 
 def buildTagParsingRegexp(l):
 	res = []
@@ -158,7 +167,7 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 	eset = {'header':{}, 'content':[]}
 	reg_str = buildTagParsingRegexp(tags)
 	tag_re = re.compile(reg_str)
-	strip_re = re.compile("^("+pref+")?"+decor+"+\s?(?P<let_me_see_you_stripped>.*)"+decor+"*("+suf+")?")
+	strip_re = re.compile("^"+decor+"?\s?(?P<let_me_see_you_stripped>.*)")
 
 	flag = False
 	one_more = False
@@ -182,6 +191,7 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 
 			tag_name = None
 			tp = None
+			stripped = start.group(1)
 		
 		#each code line
 		single = re.match('^'+sing, stripped)
@@ -219,7 +229,7 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 				tp = tag_data['type']
 				tag_name = tag_data['name']	
 
-			if tag_name not in e[tp]:
+			if tag_name not in e[tp] and tag_name in decl[tp]:
 				e[tp][tag_name] = []
 			if tag_data is not None and type(tag_data) is dict:
 				res = None
@@ -231,16 +241,16 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 			else:
 				if tag_name in decl[tp]:
 					stripped = decl[tp][tag_name](stripped)
-				ln = len(e[tp][tag_name])
-				if stripped is not None:
-					if ln > 0:
-						dtype = type(e[tp][tag_name][ln-1])
-						if dtype is dict and 'description' in e[tp][tag_name][ln-1] and e[tp][tag_name][ln-1]['description'] is not None:
-							e[tp][tag_name][ln-1]['description']+='\n'+stripped
-						elif dtype is str:	
-							e[tp][tag_name][ln-1]+= '\n'+stripped
-					else:
-						e[tp][tag_name].append(stripped)
+					ln = len(e[tp][tag_name])
+					if stripped is not None:
+						if ln > 0:
+							dtype = type(e[tp][tag_name][ln-1])
+							if dtype is dict and 'description' in e[tp][tag_name][ln-1] and e[tp][tag_name][ln-1]['description'] is not None:
+								e[tp][tag_name][ln-1]['description']+='\n'+stripped
+							elif dtype is str:	
+								e[tp][tag_name][ln-1]+= '\n'+stripped
+						else:
+							e[tp][tag_name].append(stripped)
 
 		#On last line, that usualy contains the function, class or field related to the documentation
 		if one_more:
@@ -248,7 +258,7 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 			if 'doc' in e and 'description' in e['doc']:
 				for i, el in enumerate(e['doc']['description']):
 					e['doc']['description'][i] = e['doc']['description'][i].strip('\n')
-				e['doc']['excerpt'] = e['doc']['description'][0].split('\n')[0]
+				e['doc']['excerpt'] = [e['doc']['description'][0].split('\n')[0]]
 
 			if first is None and e is not None and 'doc' in e and e['doc'] is not None:
 				first = e['doc']
@@ -262,8 +272,7 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 
 			fn_info = lang[extension](stripped)
 			if fn_info is not None and 'name' in fn_info:
-				for f in fn_info:
-					e[f] = fn_info[f]
+				update(e, fn_info)
 			else:
 				e = None
 
@@ -317,28 +326,14 @@ def doFile(root, uri, collector, extension='js'):
 		if not root.endswith(os.sep):
 			root += os.sep
 		iden = '.'.join(uri[len(root):-len(ext)].split(os.sep))
-		result = getCommentData(uri, tags, decl, extension)
+		result = getCommentData(uri, tags, decl, extension, comments[extension]['pref'], comments[extension]['suf'], comments[extension]['decor'], comments[extension]['single'])
 		if not result['content'] and not result['header']:
 			return
 		result['header']['uri'] = uri
 		result['header']['id'] = iden
 		collector[iden] = result
 
-#XXX: this is only temporary
-def outputResult(uri, collector):
-	f = open(uri, 'w')
-	f.write('var dipdoc = '+json.dumps(collector,indent=4))
-	f.close()
-
-#Run the mother fucker	
-def run(url, langs=['js'], skip=[], exclude_hidden=True):
-	
-	modskip = []
-	for i in skip:
-		modskip.append(os.path.join(url, i))
-	skip = modskip
-	
-	res = {}
+def doForAllLangs(res, url, ex, skip=[], exclude_hidden=True):
 	
 	data = {}
 	
@@ -352,39 +347,31 @@ def run(url, langs=['js'], skip=[], exclude_hidden=True):
 				tup = self.queue.get()
 				doFile(*tup)
 				self.queue.task_done()
-    
-	for ex in langs:
-		mod = importFromURI('lang/'+ex+'.py')
-		if mod is not None:
-			lang[ex] = {}
-			lang[ex] = mod.fn
-		else:
+	
+	queue = Queue.Queue()
+	
+	for i in range(10):
+		t = ThreadFile(queue)
+		t.setDaemon(True)
+		t.start()
+		
+	for root, dirs, files in os.walk(url):
+		if exclude_hidden:
+			for d in dirs:
+				if d.startswith('.'):
+					dirs.remove(d)
+
+		if root in skip:
+			for d in dirs:
+				dirs.remove(d)
 			continue
 		
-		queue = Queue.Queue()
-		
-		for i in range(10):
-			t = ThreadFile(queue)
-			t.setDaemon(True)
-			t.start()
-			
-		for root, dirs, files in os.walk(url):
-			if exclude_hidden:
-				for d in dirs:
-					if d.startswith('.'):
-						dirs.remove(d)
-	
-			if root in skip:
-				for d in dirs:
-					dirs.remove(d)
+		for f in files:
+			fpath = os.path.join(root, f)
+			if fpath in skip:
 				continue
-			
-			for f in files:
-				fpath = os.path.join(root, f)
-				if fpath in skip:
-					continue
-			
-				queue.put((url, fpath, data, ex))
+		
+			queue.put((url, fpath, data, ex))
 					
 		queue.join()
 		
@@ -394,6 +381,54 @@ def run(url, langs=['js'], skip=[], exclude_hidden=True):
 		container['details']['lang'] = ex
 		container['details']['root'] = url
 		res[ex] = container
+
+#XXX: this is only temporary
+def outputResult(uri, collector):
+	f = open(uri, 'w')
+	f.write('var dipdoc = '+json.dumps(collector,indent=4))
+	f.close()
+
+#Run the mother fucker	
+def run(url, langs=['js'], skip=[], exclude_hidden=True):
+	
+	res = {}
+	
+	modskip = []
+	for i in skip:
+		modskip.append(os.path.join(url, i))
+	skip = modskip
+	
+	class ThreadAllLangs(threading.Thread):
+		def __init__(self, queue):
+			threading.Thread.__init__(self)
+			self.queue = queue
+
+		def run(self):
+			while True:
+				tup = self.queue.get()
+				doForAllLangs(*tup)
+				self.queue.task_done()
+	
+	queue = Queue.Queue()
+		
+	for i in range(3):
+		t = ThreadAllLangs(queue)
+		t.setDaemon(True)
+		t.start()
+		
+	for ex in langs:
+	
+		mod = importFromURI('lang/'+ex+'.py')
+		if mod is not None:
+			lang[ex] = {}
+			lang[ex] = mod.fn
+			comments[ex] = {}
+			comments[ex] = mod.comments
+		else:
+			continue
+			
+		queue.put((res, url, ex, skip, exclude_hidden))
+	queue.join()
 	
 	#XXX: only temporary
 	outputResult(os.path.join(url, 'dipdoc.json'), res)
