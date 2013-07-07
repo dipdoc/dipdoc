@@ -138,7 +138,7 @@ ivar.net.Communication.prototype.register = function(obj) {
 			this.send(requestObject, obj.request.method);
 		};
 	}
-	this.registered.put(obj.request.method, ivar.extend(this.defaults, obj, 0));
+	this.registered.put(obj.request.method, ivar.extend(ivar.clone(this.defaults), obj));
 };
 
 /**
@@ -171,7 +171,7 @@ ivar.net.Communication.prototype.unregister = function(method_name) {
  *	@return	{boolean}									If sending is successful or not	
  */
 ivar.net.Communication.prototype.send = function(options) {
-	var obj = ivar.extend(this.defaults, options, 0);
+	var obj = ivar.extend(ivar.clone(this.defaults), options);
 	
 	if (!ivar.isSet(obj.uri) || !ivar.isSet(obj.request) || !ivar.isSet(obj.request.method)) {
 		return this.failed(obj, 'URL or Request object, or request method is not set! Check your request object!', false);

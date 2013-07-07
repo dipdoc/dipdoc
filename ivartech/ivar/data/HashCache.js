@@ -10,10 +10,15 @@
  */
  
 ivar.namespace('ivar.data');
+
+/**
+ *	Test depencancy
+ */
+ivar.require('ivar.data.Map');
  
 /**
  * @example
- 	a = {'a':1,
+ *	a = {'a':1,
 		'b':{'c':[1,2,[3,45],4,5],
 			'd':{'q':1, 'b':{q':1, 'b':8},'c':4},
 			'u':'lol'},
@@ -44,64 +49,39 @@ ivar.namespace('ivar.data');
  * @param	{array}	a	An array of values to store on init
  */
 ivar.data.HashCache = function(a) {
-	
 	/**
 	 * Keeps values in arrays labeled under typewise crc32 hashes
 	 *
 	 * @this	HashCache
 	 * @protected
 	 */
-	var storage = {}
-	
-	/**
-	 * Type modifier
-	 *
-	 * @this	HashCache
-	 * @protected
-	 */
-	var types = {
-		'integer': 0,
-		'float': 0,
-		'string': 1,
-		'array': 2,
-		'object': 3,
-		'function': 4,
-		'regexp': 5,
-		'date': 6,
-		'null': 7,
-		'undefined': 8,
-		'boolean': 9
-	}
+	var storage = {};
 	
 	/**
 	 * Produces an integer hash of a given value
-	 * Note that this is typewise hashing, because crc32 hashes strings, and boolean true would be the same as string 'true' or a sting '123' would be the same as integer 123, etc... So according to type the final crc hash is multiplied by 10 and the type modifier ranging from 0-9 is being added. If the object is passed, before JSON stringification the properties are ordered.
+	 * If the object is passed, before JSON stringification the properties are ordered. Note that because crc32 hashes strings, then boolean true would be the same as string 'true' or a sting '123' would be the same as integer 123, etc... We could add some modifier to solve this but a chance of using this with a set of values different by type is low in common use.
 	 *
 	 * @this 	HashCache
 	 * @protected
 	 * @param	{any}	value 	Any value to be hashed
 	 * @return	{integer}		Integer hash
 	 *
-	 * @see 	ivar.sortProperties
+	 * @see 	sortProperties
 	 * @see 	ivar.whatis
 	 * @see 	HashCache.types
-	 * @see		ivar.crc32
 	 */	
 	var hashFn = function(value) {
-		var type = types[ivar.whatis(value)];
+		var type = ivar.types[ivar.whatis(value)];
 		
-		if (type === 2 || type === 3) {
-			if(type === 3)
-				value = ivar.sortProperties(value);
-			value = JSON.stringify(value);
+		if (type === 5) {
+			value = ivar.arrayStringify(value);
 		} else if(type === 6) {
-			value = value.getTime();
+			value = ivar.orderedStringify(value);
 		} else {
 			value = value.toString();
 		}
-			
-		var h = ivar.crc32(value);
-		return	h*10+type;
+
+		return	ivar.crc32(value);
 	};
 	
 	/**
@@ -116,18 +96,14 @@ ivar.data.HashCache = function(a) {
 	 * @return	{boolean}			Returns if the value is listed under its hash in HashCache instance
 	 *
 	 * @see HashCache.storage
-	 * @see	ivar.equals
+	 * @see	ivar.equal
 	 */
 	var hashHoldsValue = function(hash, value) {
-		var bucket = storage[hash]
-		if (bucket) {
-			if (bucket.length > 1) {
-				for (var i = 0; i < bucket.length; i++) {
-					if(ivar.equals(bucket[i], value))
-						return true;
-				}
-			} else if (bucket.length === 1) {
-				return true;
+		var bucket = storage[hash];
+		if (bucket && bucket.length > 0) {
+			for (var i = 0; i < bucket.length; i++) {
+				if(ivar.equal(bucket[i], value))
+					return true;
 			}
 		}
 		return false
@@ -181,23 +157,22 @@ ivar.data.HashCache = function(a) {
 	 *
 	 * @see	HashCache.hashFn
 	 * @see HashCache.storage
-	 * @see ivar.equals
+	 * @see ivar.equal
 	 */
 	this.remove = function(value) {
 		var hash = hashFn(value);
 		var bucket = storage[hash];
 		var res = false;
-		if(bucket) {
-			if(bucket.length > 1) {
-				for (var i = 0; i < bucket.length; i++) {
-					if(ivar.equals(bucket[i], value)) {
-						storage[hash].splice(i, 1);
-						res = true;
-					}
+		if(bucket && bucket.length > 0) {
+			for (var i = 0; i < bucket.length; i++) {
+				if(ivar.equal(bucket[i], value)) {
+					storage[hash].splice(i, 1);
+					res = true;
 				}
-			} else {
+			}
+			//Clean up
+			if(bucket.length === 0) {
 				delete storage[hash];
-				res = true;
 			}
 		}
 		return res;
@@ -205,11 +180,9 @@ ivar.data.HashCache = function(a) {
 	
 	
 	//INIT
-	if (a !== undefined) { 
-		if (ivar.whatis(a) === 'array') {
-			for (var i = 0; i < a.length; i++) {
-				this.put(a[i]);
-			}
+	if (a !== undefined && ivar.whatis(a) === 'array') {
+		for (var i = 0; i < a.length; i++) {
+			this.put(a[i]);
 		}
 	}
 };

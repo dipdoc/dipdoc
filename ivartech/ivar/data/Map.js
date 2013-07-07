@@ -53,6 +53,14 @@ ivar.data.Map = function Map(o) {
 		return key;
 	};
 	
+	this.set = function(key, value) {
+		if(this.hasKey(key)) {
+			this.put(key, value);
+			return true;
+		}
+		return false;
+	};
+	
 	/**
 	*	Clones another map's values to this map
 	*
@@ -109,42 +117,6 @@ ivar.data.Map = function Map(o) {
 	*/
 	this.sort = function(fn) {
 		keys.sort(fn);
-	}
-	
-	this.hasNext = function() {
-		return pointer < keys.length;
-	};
-	
-	this.next = function() {
-		if(this.hasNext()) {
-			var key = keys[pointer];
-			pointer++;
-			return {key: key, value: this.get(key)};
-		}
-	};
-	
-	this.nextKey = function() {
-		if(this.hasNext()) {
-			return keys[pointer];
-		}
-	};
-	
-	this.hasPrevious = function() {
-		return pointer > 0;
-	};
-	
-	this.previous = function() {
-		if(this.hasPrevious()) {
-			pointer--;
-			var key = keys[pointer];
-			return {key: key, value: this.get(key)};
-		}
-	};
-	
-	this.previousKey = function() {
-		if(this.hasPrevious()) {
-			return keys[pointer-1];
-		}
 	};
 	
 	/**

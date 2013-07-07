@@ -207,7 +207,7 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 			
 		#each multiline comment line
 		if flag and not one_more:
-
+			
 			st = strip_re.match(stripped)
 			if st is not None:
 				stripped = st.group('let_me_see_you_stripped') #rammstein version
@@ -218,7 +218,7 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 					stripped = end.group(1)
 				else:
 					stripped = line
-
+			
 			if tag_name is None:
 				tag_name = 'description'
 				tp = 'doc'
@@ -258,7 +258,8 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 			if 'doc' in e and 'description' in e['doc']:
 				for i, el in enumerate(e['doc']['description']):
 					e['doc']['description'][i] = e['doc']['description'][i].strip('\n')
-				e['doc']['excerpt'] = [e['doc']['description'][0].split('\n')[0]]
+				if 'excerpt' not in e['doc']:
+					e['doc']['excerpt'] = [e['doc']['description'][0].split('\n')[0]]	
 
 			if first is None and e is not None and 'doc' in e and e['doc'] is not None:
 				first = e['doc']
@@ -278,7 +279,6 @@ def getCommentData(uri, tags, decl, extension='js',pref='/\*', suf='\*/', decor=
 
 			if flag and e is not None:
 				eset['content'].append(e)
-
 
 			one_more = False
 			flag = False

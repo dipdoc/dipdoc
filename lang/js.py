@@ -13,7 +13,7 @@ def jsExtract(s):
 		return
 		
 	isFn = re.match(r'.*function(\s|\t)*.*(\s|\t)*\(', s)
-	isImport = re.match(r'^(import|include|require)(\s|\t)*\((?P<id>.*)\)', s)
+	isImport = re.match('^.*(import|include|require)(\s|\t)*\(?(\'|\")?(?P<id>[a-zA-Z0-9._$]*)(\'|\")?\)?;?$', s)
 	if isFn is not None:
 		res['type'] = 'function'
 		#args = re.match(r'.*function(\s|\t)*.*(\s|\t)*\((\s|\t)*(?P<args>([a-zA-Z_$][a-zA-Z0-9_$]*(\s|\t)*,(\s|\t)*)*([a-zA-Z_$][a-zA-Z0-9_$]*)?)(\s|\t)*\)(\s|\t)*\{?', s)
@@ -23,8 +23,8 @@ def jsExtract(s):
 		if proto is not None:
 			res['name'] = proto.group('name')
 			res['parent'] = proto.group('parent')
-			res['namespace'] = '.'.join(proto.group('parent').split('.')[:-1])
-			res['doc']['this'] = proto.group('parent')
+			#res['namespace'] = '.'.join(proto.group('parent').split('.')[:-1])
+			#res['doc']['this'] = proto.group('parent')
 			return res
 			
 		fn = re.match(r'^function(\s|\t)*(?P<name>..*)(\s|\t)*\(', s)

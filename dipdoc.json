@@ -39,10 +39,8 @@ var dipdoc = {
                         "unit": {}
                     }, 
                     {
-                        "name": "bind ", 
                         "parent": "ivar.patt.Events", 
                         "doc": {
-                            "this": "ivar.patt.Events", 
                             "excerpt": [
                                 "Binds a single function or an array of functions to an event name"
                             ], 
@@ -73,15 +71,13 @@ var dipdoc = {
                                 "\nvar me = new ivar.patt.Events();\nme.bind(['foo','bar','baz'], function(){\nprint('foo%bar%baz');\n});\n\nme.bind(['foo','baz'], function(){\nprint('foo%baz');\n});\n\nme.bind(['baz','bar'], function(){\nprint('baz%bar');\n});\n\nivar.print(me);\nme.fire('foo');\nme.unbind(['bar','baz']);\nme.fire('baz');\nme.fire('bar');\n\n"
                             ]
                         }, 
-                        "namespace": "ivar.patt", 
                         "type": "function", 
+                        "name": "bind ", 
                         "unit": {}
                     }, 
                     {
-                        "name": "unbind ", 
                         "parent": "ivar.patt.Events", 
                         "doc": {
-                            "this": "ivar.patt.Events", 
                             "excerpt": [
                                 "Removes a certain function or array of functions from an event, thus disabling them to be fired"
                             ], 
@@ -109,20 +105,43 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.patt", 
                         "type": "function", 
+                        "name": "unbind ", 
                         "unit": {}
                     }, 
                     {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": [
+                                "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions."
+                            ], 
+                            "description": [
+                                "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "string", 
+                                        "number"
+                                    ], 
+                                    "name": "event_name", 
+                                    "description": "\n"
+                                }
+                            ]
+                        }, 
+                        "type": "function", 
                         "name": "fire ", 
+                        "unit": {}
+                    }, 
+                    {
                         "parent": "ivar.patt.Events", 
                         "doc": {
-                            "this": "ivar.patt.Events", 
                             "excerpt": [
-                                "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions."
+                                "Returns an array of all of the names of events that can be fired"
                             ], 
                             "description": [
-                                "Executes all of the functions stored under given event name. Except mandatory event name parameter it can be passed infinite number of parameters that will be passed to functions."
+                                "Returns an array of all of the names of events that can be fired"
                             ], 
                             "param": [
                                 {
@@ -136,20 +155,18 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.patt", 
                         "type": "function", 
-                        "unit": {}
-                    }, 
-                    {
                         "name": "getBound ", 
+                        "unit": {}
+                    }, 
+                    {
                         "parent": "ivar.patt.Events", 
                         "doc": {
-                            "this": "ivar.patt.Events", 
                             "excerpt": [
-                                "Returns an array of all of the names of events that can be fired"
+                                "Removes an event by given event name with all bound functions"
                             ], 
                             "description": [
-                                "Returns an array of all of the names of events that can be fired"
+                                "Removes an event by given event name with all bound functions"
                             ], 
                             "param": [
                                 {
@@ -163,58 +180,27 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.patt", 
                         "type": "function", 
-                        "unit": {}
-                    }, 
-                    {
                         "name": "clearBound ", 
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "this": "ivar.patt.Events", 
-                            "excerpt": [
-                                "Removes an event by given event name with all bound functions"
-                            ], 
-                            "description": [
-                                "Removes an event by given event name with all bound functions"
-                            ], 
-                            "param": [
-                                {
-                                    "mandatory": true, 
-                                    "type": [
-                                        "string", 
-                                        "number"
-                                    ], 
-                                    "name": "event_name", 
-                                    "description": "\n"
-                                }
-                            ]
-                        }, 
-                        "namespace": "ivar.patt", 
-                        "type": "function", 
                         "unit": {}
                     }, 
                     {
+                        "parent": "ivar.patt.Events", 
+                        "doc": {
+                            "excerpt": [
+                                "Removes all entries and restores the object to null state"
+                            ], 
+                            "description": [
+                                "Removes all entries and restores the object to null state"
+                            ]
+                        }, 
+                        "type": "function", 
                         "name": "clear ", 
-                        "parent": "ivar.patt.Events", 
-                        "doc": {
-                            "this": "ivar.patt.Events", 
-                            "excerpt": [
-                                "Removes all entries and restores the object to null state"
-                            ], 
-                            "description": [
-                                "Removes all entries and restores the object to null state"
-                            ]
-                        }, 
-                        "namespace": "ivar.patt", 
-                        "type": "function", 
                         "unit": {}
                     }, 
                     {
-                        "name": "size ", 
                         "parent": "ivar.patt.Events", 
                         "doc": {
-                            "this": "ivar.patt.Events", 
                             "excerpt": [
                                 "Returns length|size, that is number of events"
                             ], 
@@ -230,8 +216,8 @@ var dipdoc = {
                                 "Returns length|size, that is number of events"
                             ]
                         }, 
-                        "namespace": "ivar.patt", 
                         "type": "function", 
+                        "name": "size ", 
                         "unit": {}
                     }
                 ], 
@@ -261,6 +247,308 @@ var dipdoc = {
                     ], 
                     "sloc": 167, 
                     "lines": 269
+                }
+            }, 
+            "ivartech.ivar.data.HashCache": {
+                "content": [
+                    {
+                        "doc": {
+                            "excerpt": [
+                                "Test depencancy"
+                            ], 
+                            "description": [
+                                "Test depencancy"
+                            ]
+                        }, 
+                        "type": "dependency", 
+                        "name": "ivar.data.Map", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "ivar.data.", 
+                        "doc": {
+                            "class": [
+                                ""
+                            ], 
+                            "excerpt": [
+                                ""
+                            ], 
+                            "description": [
+                                ""
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "array"
+                                    ], 
+                                    "name": "a", 
+                                    "description": "An array of values to store on init\n"
+                                }
+                            ], 
+                            "example": [
+                                "\na = {'a':1,\n'b':{'c':[1,2,[3,45],4,5],\n'd':{'q':1, 'b':{q':1, 'b':8},'c':4},\n'u':'lol'},\n'e':2};\n\nb = {'a':1,\n'b':{'c':[2,3,[1]],\n'd':{'q':3,'b':{'b':3}}},\n'e':2};\n\nc = \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n\nvar hc = new HashCache();\nhc.put({a:1, b:1});\nhc.put({b:1, a:1});\nhc.put(true);\nhc.put('true');\nhc.put(a)\nconsole.log(hc.exists(b))\nconsole.log(hc.exists(a))\nconsole.log(hc.exists(c))\nhc.remove(a)\nconsole.log(hc.exists(a))\nhc.put(c)\nconsole.log(hc.exists(c))\n"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "HashCache ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "doc": {
+                            "this": [
+                                "HashCache"
+                            ], 
+                            "protected": [
+                                "\n"
+                            ], 
+                            "excerpt": [
+                                "Keeps values in arrays labeled under typewise crc32 hashes"
+                            ], 
+                            "description": [
+                                "Keeps values in arrays labeled under typewise crc32 hashes"
+                            ]
+                        }, 
+                        "type": "field", 
+                        "name": "storage ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "doc": {
+                            "return": [
+                                {
+                                    "type": [
+                                        "integer"
+                                    ], 
+                                    "description": "Integer hash\n"
+                                }
+                            ], 
+                            "description": [
+                                "Produces an integer hash of a given value\nIf the object is passed, before JSON stringification the properties are ordered. Note that because crc32 hashes strings, then boolean true would be the same as string 'true' or a sting '123' would be the same as integer 123, etc... We could add some modifier to solve this but a chance of using this with a set of values different by type is low in common use."
+                            ], 
+                            "this": [
+                                "HashCache"
+                            ], 
+                            "excerpt": [
+                                "Produces an integer hash of a given value"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": "Any value to be hashed"
+                                }
+                            ], 
+                            "see": [
+                                "sortProperties", 
+                                "ivar.whatis", 
+                                "HashCache.types\n"
+                            ], 
+                            "protected": [
+                                ""
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "hashFn ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "doc": {
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "Returns if the value is listed under its hash in HashCache instance\n"
+                                }
+                            ], 
+                            "description": [
+                                "Checks if the value is stored under the selected hash key.\nUnder the same hash can be stored one or more values, this happens due to hash collisions and entries other then first element of the array are called overflow entries."
+                            ], 
+                            "this": [
+                                "HashCache"
+                            ], 
+                            "excerpt": [
+                                "Checks if the value is stored under the selected hash key."
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "integer"
+                                    ], 
+                                    "name": "hash", 
+                                    "description": "Hash of the value"
+                                }, 
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": "Submited value"
+                                }
+                            ], 
+                            "see": [
+                                "HashCache.storage", 
+                                "ivar.equal\n"
+                            ], 
+                            "protected": [
+                                "\n"
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "hashHoldsValue ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "description": [
+                                "Hashes the value and stores it in the hash table where the generated hash is a key"
+                            ], 
+                            "this": [
+                                "HashCache"
+                            ], 
+                            "excerpt": [
+                                "Hashes the value and stores it in the hash table where the generated hash is a key"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": "Any value to be stored\n"
+                                }
+                            ], 
+                            "see": [
+                                "HashCache.hashFn", 
+                                "HashCache.hashHoldsValue", 
+                                "HashCache.storage\n"
+                            ], 
+                            "public": [
+                                ""
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "put ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "If the value is listed\n"
+                                }
+                            ], 
+                            "description": [
+                                "Checks if the value is listed in HashCache instance"
+                            ], 
+                            "this": [
+                                "HashCache"
+                            ], 
+                            "excerpt": [
+                                "Checks if the value is listed in HashCache instance"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": "Any value to be checked"
+                                }
+                            ], 
+                            "see": [
+                                "HashCache.hashFn", 
+                                "HashCache.hashHoldsValue\n"
+                            ], 
+                            "public": [
+                                ""
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "exists ", 
+                        "unit": {}
+                    }, 
+                    {
+                        "parent": "this", 
+                        "doc": {
+                            "return": [
+                                {
+                                    "type": [
+                                        "boolean"
+                                    ], 
+                                    "description": "If the value existed and was removed\n"
+                                }
+                            ], 
+                            "description": [
+                                "Finds the value listed and removes it from the HashCache instance"
+                            ], 
+                            "this": [
+                                "HashCache"
+                            ], 
+                            "excerpt": [
+                                "Finds the value listed and removes it from the HashCache instance"
+                            ], 
+                            "param": [
+                                {
+                                    "mandatory": true, 
+                                    "type": [
+                                        "any"
+                                    ], 
+                                    "name": "value", 
+                                    "description": "Any value to be removed"
+                                }
+                            ], 
+                            "see": [
+                                "HashCache.hashFn", 
+                                "HashCache.storage", 
+                                "ivar.equal\n"
+                            ], 
+                            "public": [
+                                ""
+                            ]
+                        }, 
+                        "type": "function", 
+                        "name": "remove ", 
+                        "unit": {}
+                    }
+                ], 
+                "header": {
+                    "description": [
+                        "A hash table value value storage\nUse it to quickly and resource efficiently find large objects or large strings in a very large collection. It uses CRC32 algorythm to convert supplied values into integer hashes and"
+                    ], 
+                    "copyright": [
+                        "ivartech < http://ivartech.com >"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat < stamat@ivartech.com >"
+                    ], 
+                    "namespace": [
+                        "ivar.data\n"
+                    ], 
+                    "excerpt": [
+                        "A hash table value value storage"
+                    ], 
+                    "uri": "dipdoc/ivartech/ivar/data/HashCache.js", 
+                    "id": "ivartech.ivar.data.HashCache", 
+                    "version": [
+                        "1.0"
+                    ], 
+                    "file": [], 
+                    "sloc": 62, 
+                    "lines": 188
                 }
             }, 
             "ivartech.ivar.data.Map": {
@@ -902,8 +1190,8 @@ var dipdoc = {
                     "file": [
                         "\n"
                     ], 
-                    "sloc": 149, 
-                    "lines": 321
+                    "sloc": 126, 
+                    "lines": 293
                 }
             }, 
             "ivartech.ivar.data.JXON": {
@@ -1145,6 +1433,7 @@ var dipdoc = {
                         "unit": {}
                     }, 
                     {
+                        "parent": "ivar.", 
                         "doc": {
                             "excerpt": [
                                 "Are two values equal, deep compare for objects and arrays."
@@ -1202,16 +1491,6 @@ var dipdoc = {
                                     ], 
                                     "name": "extender", 
                                     "description": "Second object extending the first one"
-                                }, 
-                                {
-                                    "mandatory": false, 
-                                    "type": [
-                                        "number[0", 
-                                        "1]", 
-                                        "boolean"
-                                    ], 
-                                    "name": "clone", 
-                                    "description": "First or the second object"
                                 }
                             ]
                         }, 
@@ -1295,20 +1574,6 @@ var dipdoc = {
                         "unit": {}
                     }, 
                     {
-                        "parent": "ivar._private.", 
-                        "doc": {
-                            "excerpt": [
-                                "==============================================================================="
-                            ], 
-                            "description": [
-                                "===============================================================================\nCrc32 is a JavaScript function for computing the CRC32 of a string\n...............................................................................\n\nVersion: 1.2 - 2006/11 - http://noteslog.com/category/javascript/\n\n-------------------------------------------------------------------------------\nCopyright (c) 2006 Andrea Ercolino\nhttp://www.opensource.org/licenses/mit-license.php\n==============================================================================="
-                            ]
-                        }, 
-                        "type": "field", 
-                        "name": "crc32_table ", 
-                        "unit": {}
-                    }, 
-                    {
                         "parent": "ivar.", 
                         "doc": {
                             "excerpt": [
@@ -1347,8 +1612,34 @@ var dipdoc = {
                     "file": [
                         "IVARTECH JavaScript Library - main class"
                     ], 
-                    "sloc": 905, 
-                    "lines": 1211
+                    "sloc": 1006, 
+                    "lines": 1320
+                }
+            }, 
+            "ivartech.ivar.draw.filter": {
+                "content": [], 
+                "header": {
+                    "description": [
+                        "Canvas filter engine"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat"
+                    ], 
+                    "excerpt": [
+                        "Canvas filter engine"
+                    ], 
+                    "lines": 164, 
+                    "uri": "dipdoc/ivartech/ivar/draw/filter.js", 
+                    "file": [], 
+                    "sloc": 116, 
+                    "todo": [
+                        {
+                            "urgent": false, 
+                            "task": ": test, organize, comment the fucking code! Exclude jquery! :D", 
+                            "complete": false
+                        }
+                    ], 
+                    "id": "ivartech.ivar.draw.filter"
                 }
             }, 
             "ivartech.ivar.search": {
@@ -1437,6 +1728,36 @@ var dipdoc = {
                         }
                     ], 
                     "id": "ivartech.ivar.search"
+                }
+            }, 
+            "ivartech.ivar.data.Iterator": {
+                "content": [], 
+                "header": {
+                    "description": [
+                        ""
+                    ], 
+                    "copyright": [
+                        "IVARTECH http://ivartech.com"
+                    ], 
+                    "author": [
+                        "Nikola Stamatovic Stamat <stamat@ivartech.com>"
+                    ], 
+                    "excerpt": [
+                        ""
+                    ], 
+                    "namespace": [
+                        "ivar.data\n"
+                    ], 
+                    "uri": "dipdoc/ivartech/ivar/data/Iterator.js", 
+                    "id": "ivartech.ivar.data.Iterator", 
+                    "version": [
+                        "20130706\n"
+                    ], 
+                    "file": [
+                        "Array and object iterator"
+                    ], 
+                    "sloc": 121, 
+                    "lines": 166
                 }
             }, 
             "ivartech.ivar.net.Communication": {
@@ -1609,10 +1930,8 @@ var dipdoc = {
                         "unit": {}
                     }, 
                     {
-                        "name": "applyOptions ", 
                         "parent": "ivar.net.Communication", 
                         "doc": {
-                            "this": "ivar.net.Communication", 
                             "excerpt": [
                                 "Applies new options to the default template"
                             ], 
@@ -1630,15 +1949,13 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.net", 
                         "type": "function", 
+                        "name": "applyOptions ", 
                         "unit": {}
                     }, 
                     {
-                        "name": "register ", 
                         "parent": "ivar.net.Communication", 
                         "doc": {
-                            "this": "ivar.net.Communication", 
                             "excerpt": [
                                 "Registers a method to be called with all of it's constant options. Options that are not constant are request.params. If only a string is passed it becomes a method name request.method. Method can be further called Communication.nameOfMethod();"
                             ], 
@@ -1738,15 +2055,13 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.net", 
                         "type": "function", 
+                        "name": "register ", 
                         "unit": {}
                     }, 
                     {
-                        "name": "unregister ", 
                         "parent": "ivar.net.Communication", 
                         "doc": {
-                            "this": "ivar.net.Communication", 
                             "excerpt": [
                                 "Removes already registered function so it can't be called anymore"
                             ], 
@@ -1764,15 +2079,13 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.net", 
                         "type": "function", 
+                        "name": "unregister ", 
                         "unit": {}
                     }, 
                     {
-                        "name": "send ", 
                         "parent": "ivar.net.Communication", 
                         "doc": {
-                            "this": "ivar.net.Communication", 
                             "excerpt": [
                                 "Send function of the communication class, used to send request to server"
                             ], 
@@ -1879,15 +2192,13 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.net", 
                         "type": "function", 
+                        "name": "send ", 
                         "unit": {}
                     }, 
                     {
-                        "name": "receive ", 
                         "parent": "ivar.net.Communication", 
                         "doc": {
-                            "this": "ivar.net.Communication", 
                             "excerpt": [
                                 "Method that is triggered upon receiving response from the server, It checks HTTP response status and parses it accordingly"
                             ], 
@@ -1953,15 +2264,13 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.net", 
                         "type": "function", 
+                        "name": "receive ", 
                         "unit": {}
                     }, 
                     {
-                        "name": "failed ", 
                         "parent": "ivar.net.Communication", 
                         "doc": {
-                            "this": "ivar.net.Communication", 
                             "excerpt": [
                                 "Method that is called when send|receive methods fail for some reason. It stores request object into unsuccessful map."
                             ], 
@@ -1995,15 +2304,13 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.net", 
                         "type": "function", 
+                        "name": "failed ", 
                         "unit": {}
                     }, 
                     {
-                        "name": "resend ", 
                         "parent": "ivar.net.Communication", 
                         "doc": {
-                            "this": "ivar.net.Communication", 
                             "excerpt": [
                                 "Resends unsuccessful request based on provided request id"
                             ], 
@@ -2030,8 +2337,8 @@ var dipdoc = {
                                 }
                             ]
                         }, 
-                        "namespace": "ivar.net", 
                         "type": "function", 
+                        "name": "resend ", 
                         "unit": {}
                     }
                 ], 
@@ -2088,30 +2395,60 @@ var dipdoc = {
                     ]
                 }
             }, 
-            "ivartech.ivar.draw.filter": {
-                "content": [], 
+            "ivartech.ivar.data": {
+                "content": [
+                    {
+                        "parent": "ivar.data.", 
+                        "doc": {
+                            "description": [
+                                "Key value data parser with quotations for string blocks"
+                            ], 
+                            "excerpt": [
+                                "Key value data parser with quotations for string blocks"
+                            ], 
+                            "lines": 64, 
+                            "uri": "dipdoc/ivartech/ivar/data.js", 
+                            "version": [
+                                "20130101\n"
+                            ], 
+                            "file": [], 
+                            "sloc": 46, 
+                            "todo": [
+                                {
+                                    "urgent": false, 
+                                    "task": "Can be done better (multilevel?)... Also make complex templater", 
+                                    "complete": false
+                                }
+                            ], 
+                            "id": "ivartech.ivar.data"
+                        }, 
+                        "type": "function", 
+                        "name": "dataParser ", 
+                        "unit": {}
+                    }
+                ], 
                 "header": {
                     "description": [
-                        "Canvas filter engine"
-                    ], 
-                    "author": [
-                        "Nikola Stamatovic Stamat"
+                        "Key value data parser with quotations for string blocks"
                     ], 
                     "excerpt": [
-                        "Canvas filter engine"
+                        "Key value data parser with quotations for string blocks"
                     ], 
-                    "lines": 164, 
-                    "uri": "dipdoc/ivartech/ivar/draw/filter.js", 
+                    "lines": 64, 
+                    "uri": "dipdoc/ivartech/ivar/data.js", 
+                    "version": [
+                        "20130101\n"
+                    ], 
                     "file": [], 
-                    "sloc": 116, 
+                    "sloc": 46, 
                     "todo": [
                         {
                             "urgent": false, 
-                            "task": ": test, organize, comment the fucking code! Exclude jquery! :D", 
+                            "task": "Can be done better (multilevel?)... Also make complex templater", 
                             "complete": false
                         }
                     ], 
-                    "id": "ivartech.ivar.draw.filter"
+                    "id": "ivartech.ivar.data"
                 }
             }, 
             "ivartech.ivar.html": {
